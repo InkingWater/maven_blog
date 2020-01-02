@@ -434,66 +434,6 @@ public class MessageExample {
             return (Criteria) this;
         }
 
-        public Criteria andBlogIdIsNull() {
-            addCriterion("blog_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andBlogIdIsNotNull() {
-            addCriterion("blog_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andBlogIdEqualTo(Integer value) {
-            addCriterion("blog_id =", value, "blogId");
-            return (Criteria) this;
-        }
-
-        public Criteria andBlogIdNotEqualTo(Integer value) {
-            addCriterion("blog_id <>", value, "blogId");
-            return (Criteria) this;
-        }
-
-        public Criteria andBlogIdGreaterThan(Integer value) {
-            addCriterion("blog_id >", value, "blogId");
-            return (Criteria) this;
-        }
-
-        public Criteria andBlogIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("blog_id >=", value, "blogId");
-            return (Criteria) this;
-        }
-
-        public Criteria andBlogIdLessThan(Integer value) {
-            addCriterion("blog_id <", value, "blogId");
-            return (Criteria) this;
-        }
-
-        public Criteria andBlogIdLessThanOrEqualTo(Integer value) {
-            addCriterion("blog_id <=", value, "blogId");
-            return (Criteria) this;
-        }
-
-        public Criteria andBlogIdIn(List<Integer> values) {
-            addCriterion("blog_id in", values, "blogId");
-            return (Criteria) this;
-        }
-
-        public Criteria andBlogIdNotIn(List<Integer> values) {
-            addCriterion("blog_id not in", values, "blogId");
-            return (Criteria) this;
-        }
-
-        public Criteria andBlogIdBetween(Integer value1, Integer value2) {
-            addCriterion("blog_id between", value1, value2, "blogId");
-            return (Criteria) this;
-        }
-
-        public Criteria andBlogIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("blog_id not between", value1, value2, "blogId");
-            return (Criteria) this;
-        }
-
         public Criteria andIpIsNull() {
             addCriterion("ip is null");
             return (Criteria) this;
@@ -681,6 +621,66 @@ public class MessageExample {
 
         public Criteria andLatitudeNotBetween(Double value1, Double value2) {
             addCriterion("latitude not between", value1, value2, "latitude");
+            return (Criteria) this;
+        }
+
+        public Criteria andFlagIsNull() {
+            addCriterion("flag is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFlagIsNotNull() {
+            addCriterion("flag is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFlagEqualTo(Integer value) {
+            addCriterion("flag =", value, "flag");
+            return (Criteria) this;
+        }
+
+        public Criteria andFlagNotEqualTo(Integer value) {
+            addCriterion("flag <>", value, "flag");
+            return (Criteria) this;
+        }
+
+        public Criteria andFlagGreaterThan(Integer value) {
+            addCriterion("flag >", value, "flag");
+            return (Criteria) this;
+        }
+
+        public Criteria andFlagGreaterThanOrEqualTo(Integer value) {
+            addCriterion("flag >=", value, "flag");
+            return (Criteria) this;
+        }
+
+        public Criteria andFlagLessThan(Integer value) {
+            addCriterion("flag <", value, "flag");
+            return (Criteria) this;
+        }
+
+        public Criteria andFlagLessThanOrEqualTo(Integer value) {
+            addCriterion("flag <=", value, "flag");
+            return (Criteria) this;
+        }
+
+        public Criteria andFlagIn(List<Integer> values) {
+            addCriterion("flag in", values, "flag");
+            return (Criteria) this;
+        }
+
+        public Criteria andFlagNotIn(List<Integer> values) {
+            addCriterion("flag not in", values, "flag");
+            return (Criteria) this;
+        }
+
+        public Criteria andFlagBetween(Integer value1, Integer value2) {
+            addCriterion("flag between", value1, value2, "flag");
+            return (Criteria) this;
+        }
+
+        public Criteria andFlagNotBetween(Integer value1, Integer value2) {
+            addCriterion("flag not between", value1, value2, "flag");
             return (Criteria) this;
         }
     }

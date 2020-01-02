@@ -10,6 +10,7 @@
     <result column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="blog_id" jdbcType="INTEGER" property="blogId" />
     <result column="parent_id" jdbcType="INTEGER" property="parentId" />
+    <result column="flag" jdbcType="INTEGER" property="flag" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -70,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, content, ip, longitude, latitude, user_id, blog_id, parent_id
+    id, content, ip, longitude, latitude, user_id, blog_id, parent_id, flag
   </sql>
   <select id="selectByExample" parameterType="xyz.lightseekers.maven_blog.bean.CommentExample" resultMap="BaseResultMap">
     select
@@ -105,10 +106,12 @@
   <insert id="insert" parameterType="xyz.lightseekers.maven_blog.bean.Comment">
     insert into blog_comment (id, content, ip, 
       longitude, latitude, user_id, 
-      blog_id, parent_id)
+      blog_id, parent_id, flag
+      )
     values (#{id,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, 
       #{longitude,jdbcType=DOUBLE}, #{latitude,jdbcType=DOUBLE}, #{userId,jdbcType=INTEGER}, 
-      #{blogId,jdbcType=INTEGER}, #{parentId,jdbcType=INTEGER})
+      #{blogId,jdbcType=INTEGER}, #{parentId,jdbcType=INTEGER}, #{flag,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" parameterType="xyz.lightseekers.maven_blog.bean.Comment">
     insert into blog_comment
@@ -137,6 +140,9 @@
       <if test="parentId != null">
         parent_id,
       </if>
+      <if test="flag != null">
+        flag,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -162,6 +168,9 @@
       </if>
       <if test="parentId != null">
         #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -198,6 +207,9 @@
       <if test="record.parentId != null">
         parent_id = #{record.parentId,jdbcType=INTEGER},
       </if>
+      <if test="record.flag != null">
+        flag = #{record.flag,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -212,7 +224,8 @@
       latitude = #{record.latitude,jdbcType=DOUBLE},
       user_id = #{record.userId,jdbcType=INTEGER},
       blog_id = #{record.blogId,jdbcType=INTEGER},
-      parent_id = #{record.parentId,jdbcType=INTEGER}
+      parent_id = #{record.parentId,jdbcType=INTEGER},
+      flag = #{record.flag,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -241,6 +254,9 @@
       <if test="parentId != null">
         parent_id = #{parentId,jdbcType=INTEGER},
       </if>
+      <if test="flag != null">
+        flag = #{flag,jdbcType=INTEGER},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -252,7 +268,8 @@
       latitude = #{latitude,jdbcType=DOUBLE},
       user_id = #{userId,jdbcType=INTEGER},
       blog_id = #{blogId,jdbcType=INTEGER},
-      parent_id = #{parentId,jdbcType=INTEGER}
+      parent_id = #{parentId,jdbcType=INTEGER},
+      flag = #{flag,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

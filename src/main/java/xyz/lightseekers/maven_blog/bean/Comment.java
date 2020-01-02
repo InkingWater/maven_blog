@@ -19,6 +19,8 @@ public class Comment implements Serializable {
 
     private Integer parentId;
 
+    private Integer flag;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -85,6 +87,14 @@ public class Comment implements Serializable {
         this.parentId = parentId;
     }
 
+    public Integer getFlag() {
+        return flag;
+    }
+
+    public void setFlag(Integer flag) {
+        this.flag = flag;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -99,6 +109,7 @@ public class Comment implements Serializable {
         sb.append(", userId=").append(userId);
         sb.append(", blogId=").append(blogId);
         sb.append(", parentId=").append(parentId);
+        sb.append(", flag=").append(flag);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

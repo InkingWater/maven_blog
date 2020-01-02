@@ -7,10 +7,10 @@
     <result column="qq" jdbcType="VARCHAR" property="qq" />
     <result column="tel" jdbcType="VARCHAR" property="tel" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
-    <result column="blog_id" jdbcType="INTEGER" property="blogId" />
     <result column="ip" jdbcType="VARCHAR" property="ip" />
     <result column="longitude" jdbcType="DOUBLE" property="longitude" />
     <result column="latitude" jdbcType="DOUBLE" property="latitude" />
+    <result column="flag" jdbcType="INTEGER" property="flag" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -71,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, content, qq, tel, user_id, blog_id, ip, longitude, latitude
+    id, content, qq, tel, user_id, ip, longitude, latitude, flag
   </sql>
   <select id="selectByExample" parameterType="xyz.lightseekers.maven_blog.bean.MessageExample" resultMap="BaseResultMap">
     select
@@ -105,13 +105,11 @@
   </delete>
   <insert id="insert" parameterType="xyz.lightseekers.maven_blog.bean.Message">
     insert into blog_message (id, content, qq, 
-      tel, user_id, blog_id, 
-      ip, longitude, latitude
-      )
+      tel, user_id, ip, longitude, 
+      latitude, flag)
     values (#{id,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, 
-      #{tel,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, #{blogId,jdbcType=INTEGER}, 
-      #{ip,jdbcType=VARCHAR}, #{longitude,jdbcType=DOUBLE}, #{latitude,jdbcType=DOUBLE}
-      )
+      #{tel,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, #{ip,jdbcType=VARCHAR}, #{longitude,jdbcType=DOUBLE}, 
+      #{latitude,jdbcType=DOUBLE}, #{flag,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="xyz.lightseekers.maven_blog.bean.Message">
     insert into blog_message
@@ -131,9 +129,6 @@
       <if test="userId != null">
         user_id,
       </if>
-      <if test="blogId != null">
-        blog_id,
-      </if>
       <if test="ip != null">
         ip,
       </if>
@@ -142,6 +137,9 @@
       </if>
       <if test="latitude != null">
         latitude,
+      </if>
+      <if test="flag != null">
+        flag,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -160,9 +158,6 @@
       <if test="userId != null">
         #{userId,jdbcType=INTEGER},
       </if>
-      <if test="blogId != null">
-        #{blogId,jdbcType=INTEGER},
-      </if>
       <if test="ip != null">
         #{ip,jdbcType=VARCHAR},
       </if>
@@ -171,6 +166,9 @@
       </if>
       <if test="latitude != null">
         #{latitude,jdbcType=DOUBLE},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -198,9 +196,6 @@
       <if test="record.userId != null">
         user_id = #{record.userId,jdbcType=INTEGER},
       </if>
-      <if test="record.blogId != null">
-        blog_id = #{record.blogId,jdbcType=INTEGER},
-      </if>
       <if test="record.ip != null">
         ip = #{record.ip,jdbcType=VARCHAR},
       </if>
@@ -209,6 +204,9 @@
       </if>
       <if test="record.latitude != null">
         latitude = #{record.latitude,jdbcType=DOUBLE},
+      </if>
+      <if test="record.flag != null">
+        flag = #{record.flag,jdbcType=INTEGER},
       </if>
     </set>
     <if test="_parameter != null">
@@ -222,10 +220,10 @@
       qq = #{record.qq,jdbcType=VARCHAR},
       tel = #{record.tel,jdbcType=VARCHAR},
       user_id = #{record.userId,jdbcType=INTEGER},
-      blog_id = #{record.blogId,jdbcType=INTEGER},
       ip = #{record.ip,jdbcType=VARCHAR},
       longitude = #{record.longitude,jdbcType=DOUBLE},
-      latitude = #{record.latitude,jdbcType=DOUBLE}
+      latitude = #{record.latitude,jdbcType=DOUBLE},
+      flag = #{record.flag,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -245,9 +243,6 @@
       <if test="userId != null">
         user_id = #{userId,jdbcType=INTEGER},
       </if>
-      <if test="blogId != null">
-        blog_id = #{blogId,jdbcType=INTEGER},
-      </if>
       <if test="ip != null">
         ip = #{ip,jdbcType=VARCHAR},
       </if>
@@ -256,6 +251,9 @@
       </if>
       <if test="latitude != null">
         latitude = #{latitude,jdbcType=DOUBLE},
+      </if>
+      <if test="flag != null">
+        flag = #{flag,jdbcType=INTEGER},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -266,10 +264,10 @@
       qq = #{qq,jdbcType=VARCHAR},
       tel = #{tel,jdbcType=VARCHAR},
       user_id = #{userId,jdbcType=INTEGER},
-      blog_id = #{blogId,jdbcType=INTEGER},
       ip = #{ip,jdbcType=VARCHAR},
       longitude = #{longitude,jdbcType=DOUBLE},
-      latitude = #{latitude,jdbcType=DOUBLE}
+      latitude = #{latitude,jdbcType=DOUBLE},
+      flag = #{flag,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

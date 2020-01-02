@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.lightseekers.maven_blog.mapper.ex.LoveEXMapper">
+    <resultMap id="loveEXResult" type="xyz.lightseekers.maven_blog.bean.ex.LoveEX">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="ip" jdbcType="VARCHAR" property="ip"/>
+        <result column="longitude" jdbcType="DOUBLE" property="longitude"/>
+        <result column="latitude" jdbcType="DOUBLE" property="latitude"/>
+        <result column="flag" jdbcType="INTEGER" property="flag"/>
+        <association property="user" column="user_id" select="selectUser"></association>
+        <association property="blog" column="blog_id" select="selectBlog"></association>
+    </resultMap>
+
+    <select id="selectAll" resultMap="loveEXResult">
+        select * from db_blog_web.blog_love
+    </select>
+
+    <select id="selectUser" resultType="xyz.lightseekers.maven_blog.bean.ex.UserEX">
+        select id,name from db_blog_web.blog_user where id = #{user_id}
+    </select>
+
+    <select id="selectBlog" resultType="xyz.lightseekers.maven_blog.bean.ex.BlogEX">
+        select id,title from db_blog_web.blog_blog where id = #{blog_id}
+    </select>
+</mapper>

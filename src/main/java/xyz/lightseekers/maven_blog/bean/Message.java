@@ -13,13 +13,13 @@ public class Message implements Serializable {
 
     private Integer userId;
 
-    private Integer blogId;
-
     private String ip;
 
     private Double longitude;
 
     private Double latitude;
+
+    private Integer flag;
 
     private static final long serialVersionUID = 1L;
 
@@ -63,14 +63,6 @@ public class Message implements Serializable {
         this.userId = userId;
     }
 
-    public Integer getBlogId() {
-        return blogId;
-    }
-
-    public void setBlogId(Integer blogId) {
-        this.blogId = blogId;
-    }
-
     public String getIp() {
         return ip;
     }
@@ -95,6 +87,14 @@ public class Message implements Serializable {
         this.latitude = latitude;
     }
 
+    public Integer getFlag() {
+        return flag;
+    }
+
+    public void setFlag(Integer flag) {
+        this.flag = flag;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -106,10 +106,10 @@ public class Message implements Serializable {
         sb.append(", qq=").append(qq);
         sb.append(", tel=").append(tel);
         sb.append(", userId=").append(userId);
-        sb.append(", blogId=").append(blogId);
         sb.append(", ip=").append(ip);
         sb.append(", longitude=").append(longitude);
         sb.append(", latitude=").append(latitude);
+        sb.append(", flag=").append(flag);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

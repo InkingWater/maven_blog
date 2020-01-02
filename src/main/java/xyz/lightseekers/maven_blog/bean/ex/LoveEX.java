@@ -1,17 +1,18 @@
 package xyz.lightseekers.maven_blog.bean.ex;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * @Description:
  * @Author: Light
- * @Date: 2020/1/2 14:30
+ * @Date: 2020/1/2 15:04
  */
-public class CommentEX implements Serializable {
+public class LoveEX implements Serializable {
     private Integer id;
 
-    private String content;
+    private UserEX user;
+
+    private BlogEX blog;
 
     private String ip;
 
@@ -19,26 +20,18 @@ public class CommentEX implements Serializable {
 
     private Double latitude;
 
-    private UserEX user;
-
-    private BlogEX blog;
-
     private Integer flag;
-
-    private List<CommentEX> children;
 
     @Override
     public String toString() {
-        return "CommentEX{" +
+        return "LoveEX{" +
                 "id=" + id +
-                ", content='" + content + '\'' +
+                ", user=" + user +
+                ", blog=" + blog +
                 ", ip='" + ip + '\'' +
                 ", longitude=" + longitude +
                 ", latitude=" + latitude +
-                ", user=" + user +
-                ", blog=" + blog +
                 ", flag=" + flag +
-                ", children=" + children +
                 '}';
     }
 
@@ -50,12 +43,20 @@ public class CommentEX implements Serializable {
         this.id = id;
     }
 
-    public String getContent() {
-        return content;
+    public UserEX getUser() {
+        return user;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setUser(UserEX user) {
+        this.user = user;
+    }
+
+    public BlogEX getBlog() {
+        return blog;
+    }
+
+    public void setBlog(BlogEX blog) {
+        this.blog = blog;
     }
 
     public String getIp() {
@@ -82,35 +83,11 @@ public class CommentEX implements Serializable {
         this.latitude = latitude;
     }
 
-    public UserEX getUser() {
-        return user;
-    }
-
-    public void setUser(UserEX user) {
-        this.user = user;
-    }
-
-    public BlogEX getBlog() {
-        return blog;
-    }
-
-    public void setBlog(BlogEX blog) {
-        this.blog = blog;
-    }
-
     public Integer getFlag() {
         return flag;
     }
 
     public void setFlag(Integer flag) {
         this.flag = flag;
-    }
-
-    public List<CommentEX> getChildren() {
-        return children;
-    }
-
-    public void setChildren(List<CommentEX> children) {
-        this.children = children;
     }
 }
