@@ -1,15 +1,25 @@
 package xyz.lightseekers.maven_blog.bean.ex;
 
-import xyz.lightseekers.maven_blog.bean.Authority;
+import java.io.Serializable;
 
-public class RoleEX {
+public class RoleEX implements Serializable {
     private Integer id;
 
     private String name;
 
     private String description;
 
-    private AuthorityEX authorities;
+    private RoleAuthEX authorities;
+
+    @Override
+    public String toString() {
+        return "RoleEX{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", authorities=" + authorities +
+                '}';
+    }
 
     public Integer getId() {
         return id;
@@ -35,11 +45,11 @@ public class RoleEX {
         this.description = description;
     }
 
-    public AuthorityEX getAuthorities() {
+    public RoleAuthEX getAuthorities() {
         return authorities;
     }
 
-    public void setAuthorities(AuthorityEX authorities) {
+    public void setAuthorities(RoleAuthEX authorities) {
         this.authorities = authorities;
     }
 }

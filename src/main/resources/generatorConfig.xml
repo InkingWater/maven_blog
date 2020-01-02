@@ -63,6 +63,7 @@
 		<table tableName="blog_type"  domainObjectName="Type"></table>
 		<table tableName="blog_user"  domainObjectName="User"></table>
 		<table tableName="blog_visitor"  domainObjectName="Visitor"></table>
+		<table tableName="blog_token"  domainObjectName="Token"></table>
 
 
 	</context>

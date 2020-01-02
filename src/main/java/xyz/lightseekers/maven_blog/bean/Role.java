@@ -9,6 +9,8 @@ public class Role implements Serializable {
 
     private String description;
 
+    private Integer authId;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -35,6 +37,14 @@ public class Role implements Serializable {
         this.description = description == null ? null : description.trim();
     }
 
+    public Integer getAuthId() {
+        return authId;
+    }
+
+    public void setAuthId(Integer authId) {
+        this.authId = authId;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -44,6 +54,7 @@ public class Role implements Serializable {
         sb.append(", id=").append(id);
         sb.append(", name=").append(name);
         sb.append(", description=").append(description);
+        sb.append(", authId=").append(authId);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

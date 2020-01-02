@@ -1,6 +1,7 @@
 package xyz.lightseekers.maven_blog.bean.ex;
 
 import xyz.lightseekers.maven_blog.bean.Type;
+import xyz.lightseekers.maven_blog.bean.User;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -14,6 +15,8 @@ import java.util.Date;
 public class BlogEX implements Serializable {
     private Integer id;
 
+    private User user;
+
     private String title;
 
     private Date date;
@@ -26,12 +29,34 @@ public class BlogEX implements Serializable {
 
     private String article;
 
+    @Override
+    public String toString() {
+        return "BlogEX{" +
+                "id=" + id +
+                ", user=" + user +
+                ", title='" + title + '\'' +
+                ", date=" + date +
+                ", love=" + love +
+                ", visitor=" + visitor +
+                ", type=" + type +
+                ", article='" + article + '\'' +
+                '}';
+    }
+
     public Integer getId() {
         return id;
     }
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getTitle() {
@@ -80,18 +105,5 @@ public class BlogEX implements Serializable {
 
     public void setArticle(String article) {
         this.article = article;
-    }
-
-    @Override
-    public String toString() {
-        return "BlogEX{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", date=" + date +
-                ", love=" + love +
-                ", visitor=" + visitor +
-                ", type=" + type +
-                ", article='" + article + '\'' +
-                '}';
     }
 }

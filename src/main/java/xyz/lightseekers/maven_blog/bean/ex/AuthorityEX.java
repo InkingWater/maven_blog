@@ -1,7 +1,5 @@
 package xyz.lightseekers.maven_blog.bean.ex;
 
-import xyz.lightseekers.maven_blog.bean.Authority;
-
 import java.io.Serializable;
 import java.util.List;
 
@@ -20,7 +18,18 @@ public class AuthorityEX implements Serializable {
 
     private String description;
 
-    private List<Authority> children;
+    private List<AuthorityEX> children;
+
+    @Override
+    public String toString() {
+        return "AuthorityEX{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", url='" + url + '\'' +
+                ", description='" + description + '\'' +
+                ", children=" + children +
+                '}';
+    }
 
     public Integer getId() {
         return id;
@@ -54,22 +63,11 @@ public class AuthorityEX implements Serializable {
         this.description = description;
     }
 
-    public List<Authority> getChildren() {
+    public List<AuthorityEX> getChildren() {
         return children;
     }
 
-    public void setChildren(List<Authority> children) {
+    public void setChildren(List<AuthorityEX> children) {
         this.children = children;
-    }
-
-    @Override
-    public String toString() {
-        return "AuthorityEX{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", url='" + url + '\'' +
-                ", description='" + description + '\'' +
-                ", children=" + children +
-                '}';
     }
 }

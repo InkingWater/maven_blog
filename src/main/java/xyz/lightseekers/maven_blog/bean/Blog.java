@@ -6,6 +6,8 @@ import java.util.Date;
 public class Blog implements Serializable {
     private Integer id;
 
+    private Integer userId;
+
     private String title;
 
     private Date date;
@@ -26,6 +28,14 @@ public class Blog implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public String getTitle() {
@@ -83,6 +93,7 @@ public class Blog implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
+        sb.append(", userId=").append(userId);
         sb.append(", title=").append(title);
         sb.append(", date=").append(date);
         sb.append(", love=").append(love);

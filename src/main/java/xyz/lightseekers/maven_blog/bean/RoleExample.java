@@ -303,6 +303,66 @@ public class RoleExample {
             addCriterion("description not between", value1, value2, "description");
             return (Criteria) this;
         }
+
+        public Criteria andAuthIdIsNull() {
+            addCriterion("auth_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthIdIsNotNull() {
+            addCriterion("auth_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthIdEqualTo(Integer value) {
+            addCriterion("auth_id =", value, "authId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthIdNotEqualTo(Integer value) {
+            addCriterion("auth_id <>", value, "authId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthIdGreaterThan(Integer value) {
+            addCriterion("auth_id >", value, "authId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("auth_id >=", value, "authId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthIdLessThan(Integer value) {
+            addCriterion("auth_id <", value, "authId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthIdLessThanOrEqualTo(Integer value) {
+            addCriterion("auth_id <=", value, "authId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthIdIn(List<Integer> values) {
+            addCriterion("auth_id in", values, "authId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthIdNotIn(List<Integer> values) {
+            addCriterion("auth_id not in", values, "authId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthIdBetween(Integer value1, Integer value2) {
+            addCriterion("auth_id between", value1, value2, "authId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("auth_id not between", value1, value2, "authId");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

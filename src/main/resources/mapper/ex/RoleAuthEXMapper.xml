@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.lightseekers.maven_blog.mapper.ex.RoleAuthEXMapper">
+    <resultMap id="roleAuthResult" type="xyz.lightseekers.maven_blog.bean.ex.RoleAuthEX">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <association property="auth" column="auth_id" select="selectAuthority"></association>
+        <collection property="children" column="id" select="selectChildren"></collection>
+    </resultMap>
+    <select id="selectById" resultMap="roleAuthResult">
+        select * from db_blog_web.blog_role_auth where id = #{id}
+    </select>
+
+    <select id="selectAuthority" resultType="xyz.lightseekers.maven_blog.bean.ex.AuthorityEX">
+        select * from db_blog_web.blog_authority where id = #{auth_id}
+    </select>
+
+    <select id="selectChildren" resultMap="roleAuthResult">
+        select * from db_blog_web.blog_role_auth where parent_id = #{id}
+    </select>
+</mapper>

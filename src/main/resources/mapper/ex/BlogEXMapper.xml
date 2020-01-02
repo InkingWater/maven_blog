@@ -8,8 +8,8 @@
         <result column="date" jdbcType="TIMESTAMP" property="date" />
         <result column="love" jdbcType="INTEGER" property="love" />
         <result column="visitor" jdbcType="INTEGER" property="visitor" />
-        <association property="type" column="type_id" select="selectType">
-        </association>
+        <association property="type" column="type_id" select="selectType"></association>
+        <association property="user" column="user_id" select="selectUser"></association>
     </resultMap>
     <resultMap id="blogEXResult" type="xyz.lightseekers.maven_blog.bean.ex.BlogEX"
                extends="blogEXNoArticleResult">
@@ -23,5 +23,8 @@
     </select>
     <select id="selectType" resultType="xyz.lightseekers.maven_blog.bean.Type">
         select * from db_blog_web.blog_type where id = #{type_id}
+    </select>
+    <select id="selectUser" resultType="xyz.lightseekers.maven_blog.bean.User">
+        select name from db_blog_web.blog_user where id = #{user_id}
     </select>
 </mapper>
