@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.lightseekers.maven_blog.mapper.ex.BlogEXMapper">
+    <resultMap id="blogEXNoArticleResult" type="xyz.lightseekers.maven_blog.bean.ex.BlogEX">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="title" jdbcType="VARCHAR" property="title" />
+        <result column="date" jdbcType="TIMESTAMP" property="date" />
+        <result column="love" jdbcType="INTEGER" property="love" />
+        <result column="visitor" jdbcType="INTEGER" property="visitor" />
+        <association property="type" column="type_id" select="selectType">
+        </association>
+    </resultMap>
+    <resultMap id="blogEXResult" type="xyz.lightseekers.maven_blog.bean.ex.BlogEX"
+               extends="blogEXNoArticleResult">
+        <result column="article" jdbcType="LONGVARCHAR" property="article"/>
+    </resultMap>
+    <select id="selectById" resultMap="blogEXResult">
+        select * from db_blog_web.blog_blog where id = id
+    </select>
+    <select id="selectAllNoContent" resultMap="blogEXNoArticleResult">
+        select * from db_blog_web.blog_blog
+    </select>
+    <select id="selectType" resultType="xyz.lightseekers.maven_blog.bean.Type">
+        select * from db_blog_web.blog_type where id = #{type_id}
+    </select>
+</mapper>
