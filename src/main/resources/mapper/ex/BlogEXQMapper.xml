@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.lightseekers.maven_blog.mapper.ex.BlogEXQMapper">
+    <!--    查询全部信息，一个{}内返回-->
+    <resultMap id="blogAllResult" type="xyz.lightseekers.maven_blog.bean.ex.BlogUserTypeEXQ">
+        <id column="id" property="id"/>
+        <result column="user" property="user"/>
+        <result column="title" property="title"/>
+        <result column="article" property="article"/>
+        <result column="date" property="date"/>
+        <result column="love" property="love"/>
+        <result column="visitor" property="visitor"/>
+        <result column="type" property="type"/>
+    </resultMap>
+    <select id="selectAll" resultMap="blogAllResult">
+        select b.id id,u.name user,b.title title,b.article article,b.date date,b.love love,b.visitor visitor,t.name type from blog_blog b,blog_type t,blog_user u where b.type_id = t.id and b.user_id = u.id
+    </select>
+
+    <!--    查询除了article的全部信息 一个{}内返回-->
+    <resultMap id="blogAllWithoutArticleResult"
+               type="xyz.lightseekers.maven_blog.bean.ex.BlogUserTypeWithoutArticleEXQ">
+        <result column="user" property="user"/>
+        <result column="title" property="title"/>
+        <result column="date" property="date"/>
+        <result column="love" property="love"/>
+        <result column="visitor" property="visitor"/>
+        <result column="type" property="type"/>
+    </resultMap>
+    <select id="selectAllWithoutArticle" resultMap="blogAllWithoutArticleResult">
+       select b.id id,u.name user,b.title title,b.date date,b.love love,b.visitor visitor,t.name type from blog_blog b,blog_type t,blog_user u where b.type_id = t.id and b.user_id = u.id
+    </select>
+    <select id="selectById" resultMap="blogAllResult">
+        select b.id id,u.name user,b.title title,b.article article,b.date date,b.love love,b.visitor visitor,t.name type from blog_blog b,blog_type t,blog_user u where b.type_id = t.id and b.user_id = u.id and b.id=#{id}
+    </select>
+    <select id="searchByBlogTitle" resultMap="blogAllResult">
+        select b.id id,u.name user,b.title title,b.article article,b.date date,b.love love,b.visitor visitor,t.name type from blog_blog b,blog_type t,blog_user u where b.type_id = t.id and b.user_id = u.id and b.title like #{titleWord}
+    </select>
+    
+    <insert id="insert">
+        insert into blog_blog values(0,#{userId},#{title},#{article},#{date},0,0,#{typeId})
+    </insert>
+
+    <select id="selectBetweenDate" resultMap="blogAllResult">
+        select b.id id,u.name user,b.title title,b.article article,b.date date,b.love love,b.visitor visitor,t.name type from blog_blog b,blog_type t,blog_user u where b.type_id = t.id and b.user_id = u.id and b.date between #{lastDate} and #{nextDate}
+    </select>
+
+    <select id="selectByTypeId" resultMap="blogAllWithoutArticleResult">
+        select b.id id,u.name user,b.title title,b.date date,b.love love,b.visitor visitor,t.name type from blog_blog b,blog_type t,blog_user u where b.type_id = t.id and b.user_id = u.id and b.type_id=#{id}
+    </select>
+</mapper>
