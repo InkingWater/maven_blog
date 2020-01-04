@@ -12,5 +12,9 @@ import java.util.List;
  */
 @Repository
 public interface LoveEXMapper {
+    /**
+     * 获取所有的点赞者
+     * @return 所有的点赞者
+     */
     List<LoveEX> selectAll();
 }

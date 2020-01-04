@@ -22,12 +22,12 @@ public class TokenUtil {
         try {
             // 生成一个MD5加密计算摘要
             MessageDigest messageDigest = MessageDigest.getInstance("MD5");
-            messageDigest.update(token.getBytes());
+            messageDigest.update(need.getBytes());
             token = new BigInteger(1, messageDigest.digest()).toString(16);
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         } finally {
-            return null;
+            return token;
         }
     }
 }

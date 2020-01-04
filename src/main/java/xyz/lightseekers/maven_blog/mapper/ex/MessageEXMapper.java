@@ -12,5 +12,9 @@ import java.util.List;
  */
 @Repository
 public interface MessageEXMapper {
+    /**
+     * 获取所有的留言
+     * @return 所有的留言
+     */
     List<MessageEX> selectAll();
 }
