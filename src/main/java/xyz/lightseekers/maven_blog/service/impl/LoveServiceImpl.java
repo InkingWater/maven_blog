@@ -59,6 +59,7 @@ public class LoveServiceImpl implements ILoveService {
         List<User> users = new ArrayList<>();
         for (LoveEXM loveEXM : loveEXMS) {
             User user = selectById(loveEXM.getUser().getId());
+            user.setPassword(null);
             if(!users.contains(user)){
                 users.add(user);
             }
@@ -78,6 +79,7 @@ public class LoveServiceImpl implements ILoveService {
         List<User> list1 = new ArrayList<>();
         for (Integer integer : list) {
             User user = userMapper.selectByPrimaryKey(integer);
+            user.setPassword(null);
             if(!list1.contains(user)){
                 list1.add(user);
             }
