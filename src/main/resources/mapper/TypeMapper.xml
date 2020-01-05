@@ -178,4 +178,7 @@
       description = #{description,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="selectByName" parameterType="xyz.lightseekers.maven_blog.bean.Type" resultMap="BaseResultMap">
+    select * from blog_type where name like #{key}
+  </select>
 </mapper>
