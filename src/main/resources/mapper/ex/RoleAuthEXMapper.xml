@@ -18,4 +18,16 @@
     <select id="selectChildren" resultMap="roleAuthResult">
         select * from db_blog_web.blog_role_auth where parent_id = #{id}
     </select>
+
+    <insert id="insertInit">
+        <selectKey keyColumn="id" keyProperty="id" order="AFTER" resultType="int">
+            select LAST_INSERT_ID()
+        </selectKey>
+            insert into blog_role_auth(id,auth_id) values(0,#{authId})
+    </insert>
+
+    <insert id="inserRoleAhth">
+        insert into blog_role_auth values (0,#{authid},#{parentid})
+    </insert>
+
 </mapper>

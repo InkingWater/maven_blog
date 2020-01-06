@@ -98,6 +98,9 @@
     </if>
   </delete>
   <insert id="insert" parameterType="xyz.lightseekers.maven_blog.bean.Token">
+        <selectKey keyProperty="id" keyColumn="id" resultType="int" order="AFTER">
+          select LAST_INSERT_ID()
+        </selectKey>
     insert into blog_token (id, user_id, token
       )
     values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{token,jdbcType=VARCHAR}

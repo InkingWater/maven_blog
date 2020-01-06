@@ -12,4 +12,13 @@
     <select id="selectById" resultMap="roleEXResult">
         select * from db_blog_web.blog_role where id = #{id}
     </select>
+
+    <select id="selectAll" resultMap="roleEXResult">
+        select * from db_blog_web.blog_role
+    </select>
+
+    <insert id="insertRole">
+        insert into blog_role values (0,#{name},#{description},#{authId})
+    </insert>
+
 </mapper>
