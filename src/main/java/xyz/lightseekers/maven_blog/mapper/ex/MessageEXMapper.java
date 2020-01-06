@@ -17,4 +17,5 @@ public interface MessageEXMapper {
      * @return 所有的留言
      */
     List<MessageEX> selectAll();
+    List<MessageEX> selectByName(String name);
 }

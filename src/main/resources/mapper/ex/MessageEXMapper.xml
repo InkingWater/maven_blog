@@ -19,4 +19,8 @@
     <select id="selectUser" resultType="xyz.lightseekers.maven_blog.bean.ex.UserEX">
         select id,name from db_blog_web.blog_user where id = #{user_id}
     </select>
+    <select id="selectByName" resultMap="messageEXResult">
+        select content from db_blog_web.blog_message where user_id in (select id from db_blog_web.blog_user where name like #{name})
+    </select>
+
 </mapper>

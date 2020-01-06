@@ -20,6 +20,7 @@ public class UserEX implements Serializable {
 
     private RoleEX role;
 
+
     private Integer flag;
 
     @Override
@@ -90,4 +91,6 @@ public class UserEX implements Serializable {
     public void setFlag(Integer flag) {
         this.flag = flag;
     }
+
+
 }
