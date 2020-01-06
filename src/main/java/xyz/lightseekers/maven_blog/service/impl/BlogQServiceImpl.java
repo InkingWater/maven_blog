@@ -10,9 +10,10 @@ import xyz.lightseekers.maven_blog.mapper.BlogMapper;
 import xyz.lightseekers.maven_blog.mapper.ex.BlogEXQMapper;
 import xyz.lightseekers.maven_blog.service.IBlogQService;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -87,7 +88,36 @@ public class BlogQServiceImpl implements IBlogQService {
         calendar_30.set(calendar_30.get(Calendar.YEAR), calendar_30.get(Calendar.MONTH), calendar_30.get(Calendar.DAY_OF_MONTH) + 1 - 30, 0, 0, 0);
         Calendar calendar = Calendar.getInstance();
         calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH) + 1, 0, 0, 0);
-        return blogEXQMapper.selectDayCountByMonth(calendar_30.getTime(), calendar.getTime());
+        List<BlogCountByMonth> listOld = blogEXQMapper.selectDayCountByMonth(calendar_30.getTime(), calendar.getTime());
+        List<BlogCountByMonth> listNew = new ArrayList<BlogCountByMonth>();
+        for (int i = 0; i < 30; i++) {
+            Calendar calendarList = Calendar.getInstance();
+            calendarList.set(calendarList.get(Calendar.YEAR), calendarList.get(Calendar.MONTH), calendarList.get(Calendar.DAY_OF_MONTH) + 1 - 30 + i, 0, 0, 0);
+            long time = calendarList.getTimeInMillis();
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            String d = format.format(time);
+            BlogCountByMonth blogCountByMonth=new BlogCountByMonth();
+            blogCountByMonth.setDatetime(d);
+            listNew.add(blogCountByMonth);
+        }
+
+
+        for (int i = 0; i < listNew.size(); i++) {
+            for (int j = 0; j < listOld.size(); j++) {
+                if (listNew.get(i).getDatetime().equals(listOld.get(j).getDatetime())) {
+                    listNew.get(i).setBlogCount(listOld.get(j).getBlogCount());
+                    break;
+                } else {
+                    listNew.get(i).setBlogCount(0);
+                }
+            }
+        }
+
+        System.out.println(listOld.get(listOld.size()-2).getDatetime());
+        System.out.println(listNew.get(listNew.size()-2).getDatetime());
+
+
+        return listNew;
     }
 
 
