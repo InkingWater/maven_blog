@@ -1,7 +1,10 @@
 package xyz.lightseekers.maven_blog.mapper.ex;
 
 import org.springframework.stereotype.Repository;
+import xyz.lightseekers.maven_blog.bean.Authority;
 import xyz.lightseekers.maven_blog.bean.ex.AuthorityEX;
+
+import java.util.List;
 
 /**
  * @Author: ZhiliangJia
@@ -17,4 +20,8 @@ public interface AuthorityEXMapper {
      * @return 当前的权限和当前权限的子权限
      */
     AuthorityEX selectChildren(int id);
+    List<AuthorityEX> selectAll();
+    List<Authority> search(String word);
+
+
 }

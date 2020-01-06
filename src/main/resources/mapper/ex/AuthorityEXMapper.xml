@@ -15,4 +15,12 @@
     <select id="selectByParentId" resultMap="authorityEXResult">
         select * from db_blog_web.blog_authority where parent_id = #{id}
     </select>
+
+    <select id="selectAll" resultMap="authorityEXResult">
+        select * from db_blog_web.blog_authority
+    </select>
+    <select id="search" resultType="xyz.lightseekers.maven_blog.bean.Authority">
+        select * from db_blog_web.blog_authority where name like #{word}
+    </select>
+
 </mapper>
