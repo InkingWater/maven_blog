@@ -16,7 +16,7 @@
         <result column="article" jdbcType="LONGVARCHAR" property="article"/>
     </resultMap>
     <select id="selectById" resultMap="blogEXResult">
-        select * from db_blog_web.blog_blog where id = id
+        select * from db_blog_web.blog_blog where id = #{id}
     </select>
     <select id="selectAllNoContent" resultMap="blogEXNoArticleResult">
         select * from db_blog_web.blog_blog
