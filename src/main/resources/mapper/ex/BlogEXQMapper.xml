@@ -14,7 +14,10 @@
         <result column="type" property="type"/>
     </resultMap>
     <select id="selectAll" resultMap="blogAllResult">
-        select b.id id,u.name user,b.title title,b.article article,b.date date,b.love love,b.visitor visitor,t.name type from blog_blog b,blog_type t,blog_user u where b.type_id = t.id and b.user_id = u.id
+        select b.id id,u.name user,b.title title,b.article article,date_format(date,'%Y-%m-%d %T') date,b.love love,b.visitor visitor,t.name type
+        from blog_blog b,blog_type t,blog_user u
+        where b.type_id = t.id and b.user_id = u.id
+        order by date desc
     </select>
 
     <!--    查询除了article的全部信息 一个{}内返回-->
@@ -28,24 +31,53 @@
         <result column="type" property="type"/>
     </resultMap>
     <select id="selectAllWithoutArticle" resultMap="blogAllWithoutArticleResult">
-       select b.id id,u.name user,b.title title,b.date date,b.love love,b.visitor visitor,t.name type from blog_blog b,blog_type t,blog_user u where b.type_id = t.id and b.user_id = u.id
+       select b.id id,u.name user,b.title title,date_format(date,'%Y-%m-%d %T') date,b.love love,b.visitor visitor,t.name type
+       from blog_blog b,blog_type t,blog_user u
+       where b.type_id = t.id and b.user_id = u.id
+       order by date desc
     </select>
     <select id="selectById" resultMap="blogAllResult">
-        select b.id id,u.name user,b.title title,b.article article,b.date date,b.love love,b.visitor visitor,t.name type from blog_blog b,blog_type t,blog_user u where b.type_id = t.id and b.user_id = u.id and b.id=#{id}
+        select b.id id,u.name user,b.title title,b.article article,date_format(date,'%Y-%m-%d %T') date,b.love love,b.visitor visitor,t.name type
+        from blog_blog b,blog_type t,blog_user u
+        where b.type_id = t.id and b.user_id = u.id and b.id=#{id}
     </select>
     <select id="searchByBlogTitle" resultMap="blogAllResult">
-        select b.id id,u.name user,b.title title,b.article article,b.date date,b.love love,b.visitor visitor,t.name type from blog_blog b,blog_type t,blog_user u where b.type_id = t.id and b.user_id = u.id and b.title like #{titleWord}
+        select b.id id,u.name user,b.title title,b.article article,date_format(date,'%Y-%m-%d %T') date,b.love love,b.visitor visitor,t.name type
+        from blog_blog b,blog_type t,blog_user u
+        where b.type_id = t.id and b.user_id = u.id and b.title like #{titleWord}
     </select>
-    
+
     <insert id="insert">
         insert into blog_blog values(0,#{userId},#{title},#{article},#{date},0,0,#{typeId})
     </insert>
 
     <select id="selectBetweenDate" resultMap="blogAllResult">
-        select b.id id,u.name user,b.title title,b.article article,b.date date,b.love love,b.visitor visitor,t.name type from blog_blog b,blog_type t,blog_user u where b.type_id = t.id and b.user_id = u.id and b.date between #{lastDate} and #{nextDate}
+        select b.id id,u.name user,b.title title,b.article article,date_format(date,'%Y-%m-%d %T') date,b.love love,b.visitor visitor,t.name type
+        from blog_blog b,blog_type t,blog_user u
+        where b.type_id = t.id and b.user_id = u.id and b.date between #{lastDate} and #{nextDate}
     </select>
 
     <select id="selectByTypeId" resultMap="blogAllWithoutArticleResult">
-        select b.id id,u.name user,b.title title,b.date date,b.love love,b.visitor visitor,t.name type from blog_blog b,blog_type t,blog_user u where b.type_id = t.id and b.user_id = u.id and b.type_id=#{id}
+        select b.id id,u.name user,b.title title,date_format(date,'%Y-%m-%d %T') date,b.love love,b.visitor visitor,t.name type
+        from blog_blog b,blog_type t,blog_user u
+        where b.type_id = t.id and b.user_id = u.id and b.type_id=#{id}
+    </select>
+
+    <select id="selectToday" resultMap="blogAllResult">
+    select b.id id,u.name user,b.title title,b.article article,date_format(date,'%Y-%m-%d %T') date,b.love love,b.visitor visitor,t.name type
+    from blog_blog b,blog_type t,blog_user u
+    where DATE_FORMAT(date,'%Y-%m-%d') like DATE_FORMAT(now(),'%Y-%m-%d') and b.type_id = t.id and b.user_id = u.id
+    </select>
+
+
+    <resultMap id="blogCountResult" type="xyz.lightseekers.maven_blog.bean.ex.BlogCountByMonth">
+        <result column="datetime" property="datetime"/>
+        <result column="blogCount" property="blogCount"/>
+    </resultMap>
+    <select id="selectDayCountByMonth" resultMap="blogCountResult">
+    select date_format(date,'%Y-%m-%d') as datetime,count(*) as blogCount
+    from blog_blog
+    where UNIX_TIMESTAMP(date) between UNIX_TIMESTAMP(#{calendar_30}) and UNIX_TIMESTAMP(#{calendar})
+    group by date_format(date,'%Y-%m-%d')
     </select>
 </mapper>

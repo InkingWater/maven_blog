@@ -1,8 +1,6 @@
 package xyz.lightseekers.maven_blog.web.controller;
 
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import xyz.lightseekers.maven_blog.bean.Blog;
 import xyz.lightseekers.maven_blog.bean.ex.BlogUserTypeEXQ;
 import xyz.lightseekers.maven_blog.bean.ex.BlogUserTypeWithoutArticleEXQ;
-import xyz.lightseekers.maven_blog.service.IBlogService;
+import xyz.lightseekers.maven_blog.service.IBlogQService;
 import xyz.lightseekers.maven_blog.util.Message;
 import xyz.lightseekers.maven_blog.util.MessageUtil;
 
@@ -25,7 +23,7 @@ import java.util.List;
 public class BlogQController {
 
     @Autowired
-    private IBlogService blogService;
+    private IBlogQService blogService;
 
     @GetMapping("/selectAll")
     @ApiOperation(value = "查询全部博客信息")
@@ -43,53 +41,53 @@ public class BlogQController {
 
     @GetMapping("/selectById")
     @ApiOperation(value = "通过Id查询全部博客信息")
-    @ApiImplicitParam(name = "id", value = "编号Id", required = true)
+//    @ApiImplicitParam(name = "id", value = "编号Id", required = true)
     public Message selectById(int id) {
         return MessageUtil.success(blogService.selectById(id));
     }
 
     @PostMapping("/insert")
     @ApiOperation(value = "创建一条新博客")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "博客编号"),
-            @ApiImplicitParam(name = "userId", value = "博主Id"),
-            @ApiImplicitParam(name = "title", value = "博客标题"),
-            @ApiImplicitParam(name = "date", value = "发表时间"),
-            @ApiImplicitParam(name = "love", value = "点赞数"),
-            @ApiImplicitParam(name = "visitor", value = "访问量"),
-            @ApiImplicitParam(name = "typeId", value = "博客栏目Id"),
-            @ApiImplicitParam(name = "article", value = "博客内容")
-    })
+//    @ApiImplicitParams({
+//            @ApiImplicitParam(name = "id", value = "博客编号"),
+//            @ApiImplicitParam(name = "userId", value = "博主Id"),
+//            @ApiImplicitParam(name = "title", value = "博客标题"),
+//            @ApiImplicitParam(name = "date", value = "发表时间"),
+//            @ApiImplicitParam(name = "love", value = "点赞数"),
+//            @ApiImplicitParam(name = "visitor", value = "访问量"),
+//            @ApiImplicitParam(name = "typeId", value = "博客栏目Id"),
+//            @ApiImplicitParam(name = "article", value = "博客内容")
+//    })
     public Message insert(Blog blog) {
         return MessageUtil.success(blogService.insert(blog));
     }
 
     @GetMapping("/searchByBlogTitle")
     @ApiOperation(value = "通过博客标题模糊查询博客的全部信息")
-    @ApiImplicitParam(name = "titleWord", value = "博客标题", required = true)
+//    @ApiImplicitParam(name = "titleWord", value = "博客标题", required = true)
     public Message searchByBlogTitle(String titleWord) {
         return MessageUtil.success(blogService.searchByBlogTitle(titleWord));
     }
 
     @GetMapping("/deleteById")
     @ApiOperation(value = "通过Id删除某一条博客")
-    @ApiImplicitParam(name = "id", value = "编号Id", required = true)
+//    @ApiImplicitParam(name = "id", value = "编号Id", required = true)
     public Message deleteById(int id) {
         return MessageUtil.success(blogService.deleteById(id));
     }
 
     @PostMapping("/update")
     @ApiOperation(value = "更新某一条博客的内容，同时更新时间戳")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "博客编号"),
-            @ApiImplicitParam(name = "userId", value = "博主Id"),
-            @ApiImplicitParam(name = "title", value = "博客标题"),
-            @ApiImplicitParam(name = "date", value = "发表时间"),
-            @ApiImplicitParam(name = "love", value = "点赞数"),
-            @ApiImplicitParam(name = "visitor", value = "访问量"),
-            @ApiImplicitParam(name = "typeId", value = "博客栏目Id"),
-            @ApiImplicitParam(name = "article", value = "博客内容")
-    })
+//    @ApiImplicitParams({
+//            @ApiImplicitParam(name = "id", value = "博客编号"),
+//            @ApiImplicitParam(name = "userId", value = "博主Id"),
+//            @ApiImplicitParam(name = "title", value = "博客标题"),
+//            @ApiImplicitParam(name = "date", value = "发表时间"),
+//            @ApiImplicitParam(name = "love", value = "点赞数"),
+//            @ApiImplicitParam(name = "visitor", value = "访问量"),
+//            @ApiImplicitParam(name = "typeId", value = "博客栏目Id"),
+//            @ApiImplicitParam(name = "article", value = "博客内容")
+//    })
     public Message update(Blog blog) {
         return MessageUtil.success(blogService.update(blog));
     }
@@ -109,5 +107,15 @@ public class BlogQController {
 //    @ApiImplicitParam(name = "typeId", value = "栏目编号Id", dataType = "Integer",required = true)
     public Message selectByTypeId(int typeId){
         return MessageUtil.success(blogService.selectByTypeId(typeId));
+    }
+
+    @GetMapping("/selectToday")
+    public Message selectToday(){
+        return MessageUtil.success(blogService.selectToday());
+    }
+
+    @GetMapping("/selectDayCountByMonth")
+    public Message selectDayCountByMonth(){
+        return MessageUtil.success(blogService.selectDayCountByMonth());
     }
 }

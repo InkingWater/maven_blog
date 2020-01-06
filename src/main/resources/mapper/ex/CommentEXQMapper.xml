@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.lightseekers.maven_blog.mapper.ex.CommentEXQMapper">
+    <resultMap id="CommentAllResult" type="xyz.lightseekers.maven_blog.bean.ex.CommentUserBlogEXQ">
+        <id column="id" property="id"/>
+        <result column="content" property="content"/>
+        <result column="ip" property="ip"/>
+        <result column="longitude" property="longitude"/>
+        <result column="latitude" property="latitude"/>
+        <result column="userName" property="userName"/>
+        <result column="blogTitle" property="blogTitle"/>
+        <result column="flag" property="flag"/>
+    </resultMap>
+    <select id="selectAll" resultMap="CommentAllResult">
+        select c.id id,c.content content,c.ip ip,c.longitude longitude,c.latitude latitude,u.name userName,b.title blogTitle,c.flag
+        from blog_comment c ,blog_user u,blog_blog b
+        where c.user_id = u.id and c.blog_id = b.id
+    </select>
+    <select id="selectByBlogId" resultMap="CommentAllResult">
+        select c.id id,c.content content,c.ip ip,c.longitude longitude,c.latitude latitude,u.name userName,b.title blogTitle,c.flag
+        from blog_comment c ,blog_user u,blog_blog b
+        where c.blog_id = #{blogId} and c.user_id = u.id and b.id = c.blog_id
+    </select>
+
+    <!--    层级返回评论信息-->
+    <resultMap id="CommentAllByCResult" type="xyz.lightseekers.maven_blog.bean.ex.CommentUserBlogEXQWithC">
+        <id column="id" property="id"/>
+        <result column="content" property="content"/>
+        <result column="ip" property="ip"/>
+        <result column="longitude" property="longitude"/>
+        <result column="latitude" property="latitude"/>
+        <result column="userName" property="userName"/>
+        <result column="blogTitle" property="blogTitle"/>
+        <result column="flag" property="flag"/>
+        <collection property="children" column="id" ofType="xyz.lightseekers.maven_blog.bean.ex.CommentUserBlogEXQ"
+                    select="selectChildren"/>
+    </resultMap>
+    <select id="selectByBlogIdByC" resultMap="CommentAllByCResult">
+        select c.id id,c.content content,c.ip ip,c.longitude longitude,c.latitude latitude,u.name userName,b.title blogTitle,c.flag
+        from blog_comment c ,blog_user u,blog_blog b
+        where c.blog_id = #{blogId} and c.user_id = u.id and b.id = c.blog_id
+    </select>
+    <select id="selectChildren" resultType="xyz.lightseekers.maven_blog.bean.ex.CommentUserBlogEXQ">
+        select c.id id,c.content content,c.ip ip,c.longitude longitude,c.latitude latitude,u.name userName,b.title blogTitle,c.flag
+        from blog_comment c ,blog_user u,blog_blog b
+        where c.user_id = u.id and c.blog_id = b.id and c.parent_id =#{id}
+    </select>
+
+
+    <resultMap id="blogResult" type="xyz.lightseekers.maven_blog.bean.ex.BlogEXQ">
+        <id column="id" property="id"/>
+        <result column="title" property="title"/>
+        <collection property="list"
+                    column="id"
+                    ofType="xyz.lightseekers.maven_blog.bean.ex.CommentUserBlogEXQ"
+                    select="selectBlogComment"/>
+    </resultMap>
+    <select id="selectLikeBlogTitleByC" resultMap="blogResult">
+        select id,title from blog_blog where title like #{blogTitle}
+    </select>
+    <select id="selectBlogComment" resultType="xyz.lightseekers.maven_blog.bean.ex.CommentUserBlogEXQ">
+        select c.id id,c.content content,c.ip ip,c.longitude longitude,c.latitude latitude,u.name userName,b.title blogTitle,c.flag
+        from blog_comment c ,blog_user u,blog_blog b
+        where c.blog_id = #{id} and c.user_id = u.id and c.blog_id = b.id
+    </select>
+</mapper>

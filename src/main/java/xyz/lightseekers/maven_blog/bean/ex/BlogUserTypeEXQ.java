@@ -10,7 +10,7 @@ public class BlogUserTypeEXQ implements Serializable {
 
     private String title;
 
-    private Date date;
+    private String date;
 
     private String article;
 
@@ -44,11 +44,11 @@ public class BlogUserTypeEXQ implements Serializable {
         this.title = title;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
