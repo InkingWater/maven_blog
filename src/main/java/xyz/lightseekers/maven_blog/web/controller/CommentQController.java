@@ -8,8 +8,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import xyz.lightseekers.maven_blog.bean.Comment;
 import xyz.lightseekers.maven_blog.service.ICommentQService;
+import xyz.lightseekers.maven_blog.service.impl.CommentQServiceImpl;
+import xyz.lightseekers.maven_blog.util.BaiDuUtil;
 import xyz.lightseekers.maven_blog.util.Message;
 import xyz.lightseekers.maven_blog.util.MessageUtil;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 @RestController
 @Repository("CommentQController")
@@ -25,12 +30,14 @@ public class CommentQController {
     }
 
     @PostMapping("/insertToComment")
-    public Message insertToCommit(Comment comment) {
+    public Message insertToComment(HttpServletRequest request,Comment comment) {
+        setMessage(comment,request);
         return MessageUtil.success(commentService.insertToComment(comment));
     }
 
     @PostMapping("/insertToBlog")
-    public Message insertToBlog(Comment comment) {
+    public Message insertToBlog(HttpServletRequest request,Comment comment) {
+        setMessage(comment,request);
         return MessageUtil.success(commentService.insertToBlog(comment));
     }
 
@@ -52,5 +59,12 @@ public class CommentQController {
     @GetMapping("/selectLikeBlogTitleByC")
     public Message selectLikeBlogTitleByC(String blogTitle) {
         return MessageUtil.success(commentService.selectLikeBlogTitleByC(blogTitle));
+    }
+
+    private void setMessage(Comment comment,HttpServletRequest request){
+        comment.setIp(BaiDuUtil.getIpAddr(request));
+        Map<String, Object> longitudeAndLatitude = BaiDuUtil.getLongitudeAndLatitude(BaiDuUtil.getIpAddr(request));
+        comment.setLongitude(Double.valueOf(longitudeAndLatitude.get("longitude").toString()));
+        comment.setLatitude(Double.valueOf(longitudeAndLatitude.get("latitude").toString()));
     }
 }

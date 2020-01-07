@@ -8,24 +8,24 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import xyz.lightseekers.maven_blog.bean.Type;
-import xyz.lightseekers.maven_blog.service.TypeHService;
+import xyz.lightseekers.maven_blog.service.ITypeHService;
 import xyz.lightseekers.maven_blog.util.Message;
 import xyz.lightseekers.maven_blog.util.MessageUtil;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/blogtype")
+@RequestMapping("/blogType")
 @Api(description = "博客类别管理")
 public class TypeHController {
     @Autowired
-    private TypeHService typeHService;
+    private ITypeHService typeHService;
 
-    @GetMapping("/secectType")
+    @GetMapping("/selectType")
     @ApiOperation("查找类别信息")
     public Message selectType()
     {
-        List<Type> list = typeHService.findType();
+        List<Type> list = typeHService.selectAll();
         return MessageUtil.success(list);
     }
 
@@ -33,34 +33,30 @@ public class TypeHController {
     @ApiOperation("删除类别信息")
     public Message deleteType(int id)
     {
-        typeHService.deleteByid(id);
-        return MessageUtil.success();
+        return MessageUtil.success(typeHService.deleteById(id));
     }
 
-    @PostMapping("/addType")
+    @PostMapping("/insertType")
     @ApiOperation("添加信息")
     public Message addType(Type type)
     {
-        typeHService.saveOrUpdate(type);
-        return MessageUtil.success();
+        return MessageUtil.success(typeHService.saveOrUpdate(type));
     }
 
-    @GetMapping("/selectByname")
+    @GetMapping("/selectByName")
     @ApiOperation("关键字搜索")
-    public Message selectByname(String key)
+    public Message selectByName(String key)
     {
-        List<Type> list = typeHService.MHfind(key);
+        List<Type> list = typeHService.selectByKey(key);
         return MessageUtil.success(list);
     }
 
 
-    @PostMapping("update")
+    @PostMapping("/update")
     @ApiOperation("更新")
     public Message updateType(Type type)
     {
-
-        typeHService.saveOrUpdate(type);
-        return  MessageUtil.success();
+        return  MessageUtil.success(typeHService.saveOrUpdate(type));
     }
 
 

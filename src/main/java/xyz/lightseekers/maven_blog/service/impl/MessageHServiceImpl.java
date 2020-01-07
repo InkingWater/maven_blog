@@ -5,13 +5,13 @@ import org.springframework.stereotype.Service;
 import xyz.lightseekers.maven_blog.bean.ex.MessageEX;
 import xyz.lightseekers.maven_blog.mapper.MessageMapper;
 import xyz.lightseekers.maven_blog.mapper.ex.MessageEXMapper;
-import xyz.lightseekers.maven_blog.service.MessageHService;
+import xyz.lightseekers.maven_blog.service.IMessageHService;
 
 import java.util.List;
 
 
 @Service
-public class MessageHServiceImpl implements MessageHService {
+public class MessageHServiceImpl implements IMessageHService {
 
     @Autowired
     private MessageEXMapper messageEXMapper;
@@ -19,10 +19,8 @@ public class MessageHServiceImpl implements MessageHService {
     private MessageMapper messageMapper;
 
     @Override
-    public void addMessage(xyz.lightseekers.maven_blog.bean.Message message) throws RuntimeException {
-
-        messageMapper.insert(message);
-
+    public int insertMessage(xyz.lightseekers.maven_blog.bean.Message message) throws RuntimeException {
+        return messageMapper.insert(message);
     }
 
     /**
@@ -31,8 +29,8 @@ public class MessageHServiceImpl implements MessageHService {
      * @throws RuntimeException
      */
     @Override
-    public void deleteMessage(int id) throws RuntimeException {
-        messageMapper.deleteByPrimaryKey(id);
+    public int deleteMessage(int id) throws RuntimeException {
+        return messageMapper.deleteByPrimaryKey(id);
     }
 
     /**
@@ -42,11 +40,12 @@ public class MessageHServiceImpl implements MessageHService {
      * @throws RuntimeException
      */
     @Override
-    public List<MessageEX> selectM(String name) throws RuntimeException {
+    public List<MessageEX> selectByName(String name) throws RuntimeException {
         if ((name==null||"".equals(name))) {
-            return findMessage();
+            return selectAll();
         }else if(!"".equals(name))
-        {//前者为空 后者不为空
+        {
+            //前者为空 后者不为空
             name="%"+name+"%";
             return messageEXMapper.selectByName(name);
         }
@@ -59,7 +58,7 @@ public class MessageHServiceImpl implements MessageHService {
      * @throws RuntimeException
      */
     @Override
-    public List<MessageEX> findMessage() throws RuntimeException {
+    public List<MessageEX> selectAll() throws RuntimeException {
         List<MessageEX> list = messageEXMapper.selectAll();
         return list;
     }

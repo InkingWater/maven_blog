@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import xyz.lightseekers.maven_blog.bean.Banner;
-import xyz.lightseekers.maven_blog.service.BannerHService;
+import xyz.lightseekers.maven_blog.service.IBannerHService;
 
 import xyz.lightseekers.maven_blog.util.Message;
 import xyz.lightseekers.maven_blog.util.MessageUtil;
@@ -20,13 +20,13 @@ import java.util.List;
 @Api(description = "图片管理")
 public class BannerHController {
     @Autowired
-    private BannerHService bannerHService;
+    private IBannerHService bannerHService;
 
-    @PostMapping("/addImg")
+    @PostMapping("/insertImg")
     @ApiOperation("添加图片")
-    public Message addImg(Banner banner)
+    public Message insertImg(Banner banner)
     {
-        bannerHService.saveorUpdate(banner);
+        bannerHService.saveOrUpdate(banner);
         return MessageUtil.success();
     }
 
@@ -35,15 +35,15 @@ public class BannerHController {
     public Message updateImg(Banner banner)
     {
 
-        bannerHService.saveorUpdate(banner);
+        bannerHService.saveOrUpdate(banner);
         return  MessageUtil.success();
     }
 
-    @GetMapping("/secectImg")
+    @GetMapping("/selectImg")
     @ApiOperation("查找可用图片")
     public Message selectImg()
     {
-        List<Banner> list = bannerHService.findT();
+        List<Banner> list = bannerHService.selectByFlag();
         return MessageUtil.success(list);
     }
 

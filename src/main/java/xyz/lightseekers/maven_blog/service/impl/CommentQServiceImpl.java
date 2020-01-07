@@ -29,19 +29,11 @@ public class CommentQServiceImpl implements ICommentQService {
 
     @Override
     public int insertToBlog(Comment comment) throws RuntimeException {
-        comment.setIp(new CommentQServiceImpl().getRemoteAddr(request));
-        Map<String, Object> longitudeAndLatitude = BaiDuUtil.getLongitudeAndLatitude(new CommentQServiceImpl().getRemoteAddr(request));
-        comment.setLongitude(Double.valueOf(longitudeAndLatitude.get("longitude").toString()));
-        comment.setLatitude(Double.valueOf(longitudeAndLatitude.get("latitude").toString()));
         return commentMapper.insert(comment);
     }
 
     @Override
     public int insertToComment(Comment comment) throws RuntimeException {
-        comment.setIp(new CommentQServiceImpl().getRemoteAddr(request));
-        Map<String, Object> longitudeAndLatitude = BaiDuUtil.getLongitudeAndLatitude(new CommentQServiceImpl().getRemoteAddr(request));
-        comment.setLongitude(Double.valueOf(longitudeAndLatitude.get("longitude").toString()));
-        comment.setLatitude(Double.valueOf(longitudeAndLatitude.get("latitude").toString()));
         return commentMapper.insert(comment);
     }
 
@@ -72,26 +64,5 @@ public class CommentQServiceImpl implements ICommentQService {
     public List<BlogEXQ> selectLikeBlogTitleByC(String blogTitle) throws RuntimeException {
         blogTitle = "%" + blogTitle + "%";
         return commentEXQMapper.selectLikeBlogTitleByC(blogTitle);
-    }
-
-
-    public String getRemoteAddr(HttpServletRequest request) {
-        String ip = request.getHeader("X-Forwarded-For");
-        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-            ip = request.getHeader("Proxy-Client-IP");
-        }
-        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-            ip = request.getHeader("WL-Proxy-Client-IP");
-        }
-        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-            ip = request.getHeader("HTTP_CLIENT_IP");
-        }
-        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-            ip = request.getHeader("HTTP_X_FORWARDED_FOR");
-        }
-        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-            ip = request.getRemoteAddr();
-        }
-        return ip;
     }
 }
