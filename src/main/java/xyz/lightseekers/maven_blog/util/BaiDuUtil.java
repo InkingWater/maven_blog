@@ -44,8 +44,9 @@ public class BaiDuUtil {
                 result.put("latitude", point.get("y"));
                 result.put("address", content.get("address"));
             } else {
-                result.put("longitude", 0);
-                result.put("latitude", 0);
+                result.put("longitude", 0.00);
+                result.put("latitude", 0.00);
+                result.get("longitude");
                 result.put("address", "error");
             }
         } catch (IOException exception) {

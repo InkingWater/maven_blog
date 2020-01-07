@@ -1,18 +1,25 @@
 package xyz.lightseekers.maven_blog.bean;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
 
 public class Visitor implements Serializable {
     private Integer id;
 
+    @ApiModelProperty(hidden = true)
     private String ip;
 
+    @ApiModelProperty(hidden = true)
     private String url;
 
+    @ApiModelProperty(hidden = true)
     private Double longitude;
 
+    @ApiModelProperty(hidden = true)
     private Double latitude;
 
+    @ApiModelProperty(hidden = true)
     private String address;
 
     private static final long serialVersionUID = 1L;

@@ -1,5 +1,7 @@
 package xyz.lightseekers.maven_blog.bean;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
 import java.util.Objects;
 

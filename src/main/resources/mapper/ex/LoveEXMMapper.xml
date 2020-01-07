@@ -35,7 +35,7 @@
     </select>
 
     <select id="selectUser" resultMap="UserBaseResultMap">
-        select * from blog_user where id = #{id}
+        select id, name, email, username from blog_user where id = #{id}
     </select>
 
     <select id="selectBlog" resultMap="BlogBaseResultMap">
