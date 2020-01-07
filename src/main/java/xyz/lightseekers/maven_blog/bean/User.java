@@ -1,11 +1,7 @@
 package xyz.lightseekers.maven_blog.bean;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiParam;
-
 import java.io.Serializable;
 
-@ApiModel
 public class User implements Serializable {
     private Integer id;
 
@@ -17,10 +13,15 @@ public class User implements Serializable {
 
     private String password;
 
-    @ApiParam(hidden = true)
     private Integer roleId;
-    @ApiParam(hidden = true)
+
     private Integer flag;
+
+    private String qq;
+
+    private String img;
+
+    private String tel;
 
     private static final long serialVersionUID = 1L;
 
@@ -80,6 +81,30 @@ public class User implements Serializable {
         this.flag = flag;
     }
 
+    public String getQq() {
+        return qq;
+    }
+
+    public void setQq(String qq) {
+        this.qq = qq == null ? null : qq.trim();
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img == null ? null : img.trim();
+    }
+
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel == null ? null : tel.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -93,6 +118,9 @@ public class User implements Serializable {
         sb.append(", password=").append(password);
         sb.append(", roleId=").append(roleId);
         sb.append(", flag=").append(flag);
+        sb.append(", qq=").append(qq);
+        sb.append(", img=").append(img);
+        sb.append(", tel=").append(tel);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

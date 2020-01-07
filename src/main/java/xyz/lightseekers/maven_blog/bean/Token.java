@@ -1,6 +1,7 @@
 package xyz.lightseekers.maven_blog.bean;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Token implements Serializable {
     private Integer id;
@@ -8,6 +9,8 @@ public class Token implements Serializable {
     private Integer userId;
 
     private String token;
+
+    private Date date;
 
     private static final long serialVersionUID = 1L;
 
@@ -35,6 +38,14 @@ public class Token implements Serializable {
         this.token = token == null ? null : token.trim();
     }
 
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -44,6 +55,7 @@ public class Token implements Serializable {
         sb.append(", id=").append(id);
         sb.append(", userId=").append(userId);
         sb.append(", token=").append(token);
+        sb.append(", date=").append(date);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

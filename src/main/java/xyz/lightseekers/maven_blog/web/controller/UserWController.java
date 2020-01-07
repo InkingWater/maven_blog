@@ -2,7 +2,6 @@ package xyz.lightseekers.maven_blog.web.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import xyz.lightseekers.maven_blog.bean.User;
 import xyz.lightseekers.maven_blog.service.IUserWService;
-import xyz.lightseekers.maven_blog.service.impl.UserWServiceImpl;
+import xyz.lightseekers.maven_blog.util.MD5Util;
 import xyz.lightseekers.maven_blog.util.Message;
 import xyz.lightseekers.maven_blog.util.MessageUtil;
 
@@ -25,19 +24,19 @@ public class UserWController {
     @GetMapping("/login")
     @ApiOperation("登录校验")
     public Message login(String usernamer, String password){
-        return MessageUtil.success(userService.login(usernamer,password));
+        return MessageUtil.success(userService.login(usernamer,MD5Util.createPassword(password)));
     }
 
     @PostMapping("/changePassword")
     @ApiOperation("修改密码")
     public Message changePassword(int id,String oldPassword,String newPassword){
-        return MessageUtil.success(userService.changePassword(id, oldPassword, newPassword));
+        return MessageUtil.success(userService.changePassword(id, MD5Util.createPassword(oldPassword), MD5Util.createPassword(newPassword)));
     }
 
     @PostMapping("/register")
     @ApiOperation("注册")
     public Message register(String username,String password,String email,String name){
-        return MessageUtil.success(userService.register(username, password, email, name));
+        return MessageUtil.success(userService.register(username, MD5Util.createPassword(password), email, name));
     }
 
     @GetMapping("/selectById")
@@ -49,12 +48,14 @@ public class UserWController {
     @PostMapping("/add")
     @ApiOperation("新增用户")
     public Message add(User user){
+        user.setPassword(MD5Util.createPassword(user.getPassword()));
         return MessageUtil.success(userService.addOrUpdate(user));
     }
 
     @PostMapping("/update")
     @ApiOperation("修改用户信息")
     public Message update(User user){
+        user.setPassword(MD5Util.createPassword(user.getPassword()));
         return MessageUtil.success(userService.addOrUpdate(user));
     }
 

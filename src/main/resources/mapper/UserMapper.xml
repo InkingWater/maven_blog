@@ -9,6 +9,9 @@
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="role_id" jdbcType="INTEGER" property="roleId" />
     <result column="flag" jdbcType="INTEGER" property="flag" />
+    <result column="qq" jdbcType="VARCHAR" property="qq" />
+    <result column="img" jdbcType="VARCHAR" property="img" />
+    <result column="tel" jdbcType="VARCHAR" property="tel" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -69,7 +72,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, email, username, password, role_id, flag
+    id, name, email, username, password, role_id, flag, qq, img, tel
   </sql>
   <select id="selectByExample" parameterType="xyz.lightseekers.maven_blog.bean.UserExample" resultMap="BaseResultMap">
     select
@@ -104,10 +107,12 @@
   <insert id="insert" parameterType="xyz.lightseekers.maven_blog.bean.User">
     insert into blog_user (id, name, email, 
       username, password, role_id, 
-      flag)
+      flag, qq, img, tel
+      )
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
       #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{roleId,jdbcType=INTEGER}, 
-      #{flag,jdbcType=INTEGER})
+      #{flag,jdbcType=INTEGER}, #{qq,jdbcType=VARCHAR}, #{img,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="xyz.lightseekers.maven_blog.bean.User">
     insert into blog_user
@@ -133,6 +138,15 @@
       <if test="flag != null">
         flag,
       </if>
+      <if test="qq != null">
+        qq,
+      </if>
+      <if test="img != null">
+        img,
+      </if>
+      <if test="tel != null">
+        tel,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -155,6 +169,15 @@
       </if>
       <if test="flag != null">
         #{flag,jdbcType=INTEGER},
+      </if>
+      <if test="qq != null">
+        #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null">
+        #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null">
+        #{tel,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -188,6 +211,15 @@
       <if test="record.flag != null">
         flag = #{record.flag,jdbcType=INTEGER},
       </if>
+      <if test="record.qq != null">
+        qq = #{record.qq,jdbcType=VARCHAR},
+      </if>
+      <if test="record.img != null">
+        img = #{record.img,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tel != null">
+        tel = #{record.tel,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -201,7 +233,10 @@
       username = #{record.username,jdbcType=VARCHAR},
       password = #{record.password,jdbcType=VARCHAR},
       role_id = #{record.roleId,jdbcType=INTEGER},
-      flag = #{record.flag,jdbcType=INTEGER}
+      flag = #{record.flag,jdbcType=INTEGER},
+      qq = #{record.qq,jdbcType=VARCHAR},
+      img = #{record.img,jdbcType=VARCHAR},
+      tel = #{record.tel,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -227,6 +262,15 @@
       <if test="flag != null">
         flag = #{flag,jdbcType=INTEGER},
       </if>
+      <if test="qq != null">
+        qq = #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null">
+        img = #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null">
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -237,7 +281,10 @@
       username = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
       role_id = #{roleId,jdbcType=INTEGER},
-      flag = #{flag,jdbcType=INTEGER}
+      flag = #{flag,jdbcType=INTEGER},
+      qq = #{qq,jdbcType=VARCHAR},
+      img = #{img,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

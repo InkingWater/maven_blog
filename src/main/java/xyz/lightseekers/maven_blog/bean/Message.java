@@ -1,6 +1,7 @@
 package xyz.lightseekers.maven_blog.bean;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Message implements Serializable {
     private Integer id;
@@ -20,6 +21,8 @@ public class Message implements Serializable {
     private Double latitude;
 
     private Integer flag;
+
+    private Date date;
 
     private static final long serialVersionUID = 1L;
 
@@ -95,6 +98,14 @@ public class Message implements Serializable {
         this.flag = flag;
     }
 
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -110,6 +121,7 @@ public class Message implements Serializable {
         sb.append(", longitude=").append(longitude);
         sb.append(", latitude=").append(latitude);
         sb.append(", flag=").append(flag);
+        sb.append(", date=").append(date);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

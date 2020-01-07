@@ -3,8 +3,6 @@ package xyz.lightseekers.maven_blog.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import xyz.lightseekers.maven_blog.bean.Authority;
-import xyz.lightseekers.maven_blog.bean.AuthorityExample;
-import xyz.lightseekers.maven_blog.bean.RoleAuth;
 import xyz.lightseekers.maven_blog.bean.RoleAuthExample;
 import xyz.lightseekers.maven_blog.bean.ex.AuthorityEX;
 import xyz.lightseekers.maven_blog.mapper.AuthorityMapper;

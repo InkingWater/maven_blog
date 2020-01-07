@@ -6,7 +6,7 @@
 <generatorConfiguration>
 	<!--驱动jar包所在路径-->
 	<classPathEntry
-		location="F:/Repository/Maven/maven-repository-3.6.2/mysql/mysql-connector-java/8.0.18/mysql-connector-java-8.0.18.jar"/>
+		location="F:/Repository/Maven/maven-repository-3.6.2/mysql/mysql-connector-java/5.1.24/mysql-connector-java-5.1.24.jar"/>
 
 	<context id="DB2Tables" targetRuntime="MyBatis3">
 		<!--实现pojo类时自动序列化-->
@@ -20,7 +20,7 @@
 		</commentGenerator>
 
 		<!-- 注意！如果要重新生成pojo类，务必改成项目组数据库，用户名密码 -->
-		<jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
 			connectionURL="jdbc:mysql://112.124.26.209/db_blog_web?useunicode=true;characterEncoding=utf8"
 			userId="team_work"
 			password="Teamwork_123">

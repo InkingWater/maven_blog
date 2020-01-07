@@ -1,11 +1,7 @@
 package xyz.lightseekers.maven_blog.bean;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiParam;
-
 import java.io.Serializable;
 
-@ApiModel
 public class Role implements Serializable {
     private Integer id;
 
@@ -13,7 +9,6 @@ public class Role implements Serializable {
 
     private String description;
 
-    @ApiParam(hidden = true)
     private Integer authId;
 
     private static final long serialVersionUID = 1L;

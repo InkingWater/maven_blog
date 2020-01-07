@@ -1,6 +1,7 @@
 package xyz.lightseekers.maven_blog.bean;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Visitor implements Serializable {
     private Integer id;
@@ -14,6 +15,8 @@ public class Visitor implements Serializable {
     private Double latitude;
 
     private String address;
+
+    private Date date;
 
     private static final long serialVersionUID = 1L;
 
@@ -65,6 +68,14 @@ public class Visitor implements Serializable {
         this.address = address == null ? null : address.trim();
     }
 
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -77,6 +88,7 @@ public class Visitor implements Serializable {
         sb.append(", longitude=").append(longitude);
         sb.append(", latitude=").append(latitude);
         sb.append(", address=").append(address);
+        sb.append(", date=").append(date);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
