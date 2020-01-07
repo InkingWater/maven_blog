@@ -1,5 +1,6 @@
 package xyz.lightseekers.maven_blog.bean;
 
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiParam;
 

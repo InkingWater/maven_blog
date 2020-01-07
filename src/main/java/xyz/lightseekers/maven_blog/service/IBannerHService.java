@@ -6,6 +6,6 @@ import java.util.List;
 
 
 public interface IBannerHService {
-    void saveOrUpdate(Banner banner) throws RuntimeException;
+    int saveOrUpdate(Banner banner) throws RuntimeException;
     List<Banner> selectByFlag() throws RuntimeException;
 }

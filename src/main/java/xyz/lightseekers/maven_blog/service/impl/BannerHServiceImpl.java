@@ -15,17 +15,17 @@ public class BannerHServiceImpl implements IBannerHService {
     private BannerMapper bannerMapper;
 
     @Override
-    public void saveOrUpdate(Banner banner) throws RuntimeException {
+    public int saveOrUpdate(Banner banner) throws RuntimeException {
         if (banner == null) {
             throw new RuntimeException();
         }
         //如果传入的参数没有ID，则添加数据
         else if (banner.getId() == null) {
-            bannerMapper.insert(banner);
+            return bannerMapper.insert(banner);
         }
         //如果传入的参数有ID，则根据主键ID修改数据
         else {
-            bannerMapper.updateFlag(banner);
+            return bannerMapper.updateFlag(banner);
         }
 
     }
