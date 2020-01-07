@@ -182,7 +182,9 @@ public class RandomImgCodeUtil {
         g2.dispose();
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ImageIO.write(image, "jpg", baos);
-        return new BASE64Encoder().encode(baos.toByteArray());
+        String answer = "data:image/png;base64,"+new BASE64Encoder().encode(baos.toByteArray());
+        answer=answer.replaceAll("\n","").replaceAll("\r","");
+        return answer;
     }
 
     /**
@@ -204,13 +206,13 @@ public class RandomImgCodeUtil {
             e.printStackTrace();
         }
     }
-
     public static void main(String[] args) throws Exception {
         String code =getStringRandom(4);
         System.out.println(code);
         String base64=imageToBase64(120, 40, code);
+//        System.out.println("data:image/png;base64,"+base64);
         System.out.println(base64);
-        base64ToImage(base64);
+//        base64ToImage(base64);
     }
 }
 

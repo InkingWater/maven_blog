@@ -3,6 +3,7 @@ package xyz.lightseekers.maven_blog.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import xyz.lightseekers.maven_blog.bean.Token;
+import xyz.lightseekers.maven_blog.bean.TokenExample;
 import xyz.lightseekers.maven_blog.bean.User;
 import xyz.lightseekers.maven_blog.bean.UserExample;
 import xyz.lightseekers.maven_blog.bean.ex.RoleEX;
@@ -47,18 +48,33 @@ public class UserWServiceImpl implements IUserWService {
         if(users.size()==0){
             return null;
         }else if(users.get(0).getPassword()==password||password.equals(users.get(0).getPassword())){
+            TokenExample tokenExample = new TokenExample();
+            tokenExample.createCriteria().andUserIdEqualTo(users.get(0).getId());
+            List<Token> tokens = tokenMapper.selectByExample(tokenExample);
             RoleEX roleEX = roleEXMapper.selectById(users.get(0).getRoleId());
             TokenEx tokenEx = new TokenEx();
-            Token token = new Token();
-            token.setToken(TokenUtil.createToken(username, String.valueOf(new Date().getTime())));
-            token.setUserId(users.get(0).getId());
-            tokenMapper.insert(token);
-            tokenEx.setToken(token.getToken());
-            tokenEx.setUserId(token.getUserId());
-            tokenEx.setName(users.get(0).getName());
-            tokenEx.setUserName(users.get(0).getUsername());
-            tokenEx.setRoleId(roleEX.getId());
-            tokenEx.setRoleName(roleEX.getName());
+            if(tokens.size()==0){
+                Token token = new Token();
+                token.setToken(TokenUtil.createToken(username, String.valueOf(new Date().getTime())));
+                token.setUserId(users.get(0).getId());
+                token.setDate(new Date());
+                tokenMapper.insert(token);
+                tokenEx.setToken(token.getToken());
+                tokenEx.setUserId(token.getUserId());
+                tokenEx.setName(users.get(0).getName());
+                tokenEx.setUserName(users.get(0).getUsername());
+                tokenEx.setRoleId(roleEX.getId());
+                tokenEx.setRoleName(roleEX.getName());
+            }
+            else{
+                Token token = tokens.get(0);
+                tokenEx.setToken(token.getToken());
+                tokenEx.setUserId(token.getUserId());
+                tokenEx.setName(users.get(0).getName());
+                tokenEx.setUserName(users.get(0).getUsername());
+                tokenEx.setRoleId(roleEX.getId());
+                tokenEx.setRoleName(roleEX.getName());
+            }
             return tokenEx;
         }else{
             return null;

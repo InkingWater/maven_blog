@@ -14,12 +14,12 @@ public class LoginWServiceImpl implements ILoginWService {
         String answer =RandomImgCodeUtil.getStringRandom(lengh);
         String base64= null;
         try {
-            base64 = RandomImgCodeUtil.imageToBase64(40,120,answer);
+            base64 = RandomImgCodeUtil.imageToBase64(120,40,answer);
         } catch (Exception e) {
             e.printStackTrace();
         }
         Map<String,String> map = new HashMap<String ,String>();
-        map.put("答案",answer);
+        map.put("answer",answer);
         map.put("base64",base64);
         return map;
     }
