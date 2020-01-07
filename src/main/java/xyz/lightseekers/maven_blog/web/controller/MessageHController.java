@@ -27,9 +27,9 @@ public class MessageHController {
     @Autowired
     private IMessageHService messageHService;
 
-    @PostMapping("/addMessage")
+    @PostMapping("/insertMessage")
     @ApiOperation("添加留言")
-    public Message addMessage(HttpServletRequest request, xyz.lightseekers.maven_blog.bean.Message message)
+    public Message insertMessage(HttpServletRequest request, xyz.lightseekers.maven_blog.bean.Message message)
     {
         String ipAddr = BaiDuUtil.getIpAddr(request);
         Map<String,Object> json= BaiDuUtil.getLongitudeAndLatitude(ipAddr);
@@ -46,9 +46,9 @@ public class MessageHController {
         return MessageUtil.success(messageHService.deleteMessage(id));
     }
 
-    @GetMapping("/findMessage")
+    @GetMapping("/selectMessage")
     @ApiOperation("查找留言")
-    public  Message findMessage(String name)
+    public  Message selectMessage(String name)
     {
         List<MessageEX> list= messageHService.selectByName(name);
         return MessageUtil.success(list);

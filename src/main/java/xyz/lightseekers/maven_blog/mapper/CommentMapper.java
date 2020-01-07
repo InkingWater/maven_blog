@@ -2,9 +2,10 @@ package xyz.lightseekers.maven_blog.mapper;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 import xyz.lightseekers.maven_blog.bean.Comment;
 import xyz.lightseekers.maven_blog.bean.CommentExample;
-
+@Repository
 public interface CommentMapper {
     long countByExample(CommentExample example);
 

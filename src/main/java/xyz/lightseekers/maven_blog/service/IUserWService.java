@@ -1,11 +1,9 @@
 package xyz.lightseekers.maven_blog.service;
 
-import xyz.lightseekers.maven_blog.bean.Token;
 import xyz.lightseekers.maven_blog.bean.User;
 import xyz.lightseekers.maven_blog.bean.ex.RoleEX;
 import xyz.lightseekers.maven_blog.bean.ex.TokenEx;
 
-import java.util.HashMap;
 import java.util.List;
 
 public interface IUserWService {

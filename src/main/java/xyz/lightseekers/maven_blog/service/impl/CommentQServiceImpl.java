@@ -9,11 +9,9 @@ import xyz.lightseekers.maven_blog.bean.ex.CommentUserBlogEXQ;
 import xyz.lightseekers.maven_blog.mapper.CommentMapper;
 import xyz.lightseekers.maven_blog.mapper.ex.CommentEXQMapper;
 import xyz.lightseekers.maven_blog.service.ICommentQService;
-import xyz.lightseekers.maven_blog.util.BaiDuUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class CommentQServiceImpl implements ICommentQService {

@@ -8,6 +8,7 @@
     <result column="longitude" jdbcType="DOUBLE" property="longitude" />
     <result column="latitude" jdbcType="DOUBLE" property="latitude" />
     <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="date" jdbcType="TIMESTAMP" property="date" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -68,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, ip, url, longitude, latitude, address
+    id, ip, url, longitude, latitude, address, date
   </sql>
   <select id="selectByExample" parameterType="xyz.lightseekers.maven_blog.bean.VisitorExample" resultMap="BaseResultMap">
     select
@@ -102,11 +103,11 @@
   </delete>
   <insert id="insert" parameterType="xyz.lightseekers.maven_blog.bean.Visitor">
     insert into blog_visitor (id, ip, url, 
-      longitude, latitude, address
-      )
+      longitude, latitude, address, 
+      date)
     values (#{id,jdbcType=INTEGER}, #{ip,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
-      #{longitude,jdbcType=DOUBLE}, #{latitude,jdbcType=DOUBLE}, #{address,jdbcType=VARCHAR}
-      )
+      #{longitude,jdbcType=DOUBLE}, #{latitude,jdbcType=DOUBLE}, #{address,jdbcType=VARCHAR}, 
+      #{date,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="xyz.lightseekers.maven_blog.bean.Visitor">
     insert into blog_visitor
@@ -129,6 +130,9 @@
       <if test="address != null">
         address,
       </if>
+      <if test="date != null">
+        date,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -148,6 +152,9 @@
       </if>
       <if test="address != null">
         #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -178,6 +185,9 @@
       <if test="record.address != null">
         address = #{record.address,jdbcType=VARCHAR},
       </if>
+      <if test="record.date != null">
+        date = #{record.date,jdbcType=TIMESTAMP},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -190,7 +200,8 @@
       url = #{record.url,jdbcType=VARCHAR},
       longitude = #{record.longitude,jdbcType=DOUBLE},
       latitude = #{record.latitude,jdbcType=DOUBLE},
-      address = #{record.address,jdbcType=VARCHAR}
+      address = #{record.address,jdbcType=VARCHAR},
+      date = #{record.date,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -213,6 +224,9 @@
       <if test="address != null">
         address = #{address,jdbcType=VARCHAR},
       </if>
+      <if test="date != null">
+        date = #{date,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -222,7 +236,8 @@
       url = #{url,jdbcType=VARCHAR},
       longitude = #{longitude,jdbcType=DOUBLE},
       latitude = #{latitude,jdbcType=DOUBLE},
-      address = #{address,jdbcType=VARCHAR}
+      address = #{address,jdbcType=VARCHAR},
+      date = #{date,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

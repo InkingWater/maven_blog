@@ -5,7 +5,6 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import xyz.lightseekers.maven_blog.bean.Type;
 import xyz.lightseekers.maven_blog.bean.TypeExample;
-
 @Repository
 public interface TypeMapper {
     long countByExample(TypeExample example);
@@ -29,6 +28,4 @@ public interface TypeMapper {
     int updateByPrimaryKeySelective(Type record);
 
     int updateByPrimaryKey(Type record);
-
-    List<Type> selectByName(String name);
 }

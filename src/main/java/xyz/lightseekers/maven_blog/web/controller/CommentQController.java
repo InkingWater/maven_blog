@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import xyz.lightseekers.maven_blog.bean.Comment;
 import xyz.lightseekers.maven_blog.service.ICommentQService;
-import xyz.lightseekers.maven_blog.service.impl.CommentQServiceImpl;
 import xyz.lightseekers.maven_blog.util.BaiDuUtil;
 import xyz.lightseekers.maven_blog.util.Message;
 import xyz.lightseekers.maven_blog.util.MessageUtil;
@@ -61,7 +60,7 @@ public class CommentQController {
         return MessageUtil.success(commentService.selectLikeBlogTitleByC(blogTitle));
     }
 
-    private void setMessage(Comment comment,HttpServletRequest request){
+    private void setMessage(Comment comment, HttpServletRequest request){
         comment.setIp(BaiDuUtil.getIpAddr(request));
         Map<String, Object> longitudeAndLatitude = BaiDuUtil.getLongitudeAndLatitude(BaiDuUtil.getIpAddr(request));
         comment.setLongitude(Double.valueOf(longitudeAndLatitude.get("longitude").toString()));

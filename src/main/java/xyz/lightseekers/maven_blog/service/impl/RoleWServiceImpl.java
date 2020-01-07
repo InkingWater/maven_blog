@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import xyz.lightseekers.maven_blog.bean.Role;
 import xyz.lightseekers.maven_blog.bean.RoleAuth;
-import xyz.lightseekers.maven_blog.bean.RoleExample;
 import xyz.lightseekers.maven_blog.bean.ex.RoleEX;
 import xyz.lightseekers.maven_blog.mapper.RoleAuthMapper;
 import xyz.lightseekers.maven_blog.mapper.RoleMapper;

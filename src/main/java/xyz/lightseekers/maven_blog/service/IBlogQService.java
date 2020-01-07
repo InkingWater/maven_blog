@@ -6,7 +6,6 @@ import xyz.lightseekers.maven_blog.bean.ex.BlogUserTypeEXQ;
 import xyz.lightseekers.maven_blog.bean.ex.BlogUserTypeWithoutArticleEXQ;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 public interface IBlogQService {

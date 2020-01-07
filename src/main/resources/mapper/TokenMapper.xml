@@ -5,6 +5,7 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="token" jdbcType="VARCHAR" property="token" />
+    <result column="date" jdbcType="TIMESTAMP" property="date" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -65,7 +66,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, user_id, token
+    id, user_id, token, date
   </sql>
   <select id="selectByExample" parameterType="xyz.lightseekers.maven_blog.bean.TokenExample" resultMap="BaseResultMap">
     select
@@ -98,13 +99,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="xyz.lightseekers.maven_blog.bean.Token">
-        <selectKey keyProperty="id" keyColumn="id" resultType="int" order="AFTER">
-          select LAST_INSERT_ID()
-        </selectKey>
-    insert into blog_token (id, user_id, token
-      )
-    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{token,jdbcType=VARCHAR}
-      )
+    insert into blog_token (id, user_id, token, 
+      date)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{token,jdbcType=VARCHAR}, 
+      #{date,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="xyz.lightseekers.maven_blog.bean.Token">
     insert into blog_token
@@ -118,6 +116,9 @@
       <if test="token != null">
         token,
       </if>
+      <if test="date != null">
+        date,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -128,6 +129,9 @@
       </if>
       <if test="token != null">
         #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -149,6 +153,9 @@
       <if test="record.token != null">
         token = #{record.token,jdbcType=VARCHAR},
       </if>
+      <if test="record.date != null">
+        date = #{record.date,jdbcType=TIMESTAMP},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -158,7 +165,8 @@
     update blog_token
     set id = #{record.id,jdbcType=INTEGER},
       user_id = #{record.userId,jdbcType=INTEGER},
-      token = #{record.token,jdbcType=VARCHAR}
+      token = #{record.token,jdbcType=VARCHAR},
+      date = #{record.date,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -172,13 +180,17 @@
       <if test="token != null">
         token = #{token,jdbcType=VARCHAR},
       </if>
+      <if test="date != null">
+        date = #{date,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="xyz.lightseekers.maven_blog.bean.Token">
     update blog_token
     set user_id = #{userId,jdbcType=INTEGER},
-      token = #{token,jdbcType=VARCHAR}
+      token = #{token,jdbcType=VARCHAR},
+      date = #{date,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

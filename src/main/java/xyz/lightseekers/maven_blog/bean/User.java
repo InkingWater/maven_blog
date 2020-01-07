@@ -1,13 +1,7 @@
 package xyz.lightseekers.maven_blog.bean;
 
-
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiParam;
-
 import java.io.Serializable;
-import java.util.Objects;
 
-@ApiModel
 public class User implements Serializable {
     private Integer id;
 
@@ -19,10 +13,15 @@ public class User implements Serializable {
 
     private String password;
 
-    @ApiParam(hidden = true)
     private Integer roleId;
-    @ApiParam(hidden = true)
+
     private Integer flag;
+
+    private String qq;
+
+    private String img;
+
+    private String tel;
 
     private static final long serialVersionUID = 1L;
 
@@ -82,6 +81,30 @@ public class User implements Serializable {
         this.flag = flag;
     }
 
+    public String getQq() {
+        return qq;
+    }
+
+    public void setQq(String qq) {
+        this.qq = qq == null ? null : qq.trim();
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img == null ? null : img.trim();
+    }
+
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel == null ? null : tel.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -95,19 +118,11 @@ public class User implements Serializable {
         sb.append(", password=").append(password);
         sb.append(", roleId=").append(roleId);
         sb.append(", flag=").append(flag);
+        sb.append(", qq=").append(qq);
+        sb.append(", img=").append(img);
+        sb.append(", tel=").append(tel);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o)
-            return true;  //先判断o是否为本对象，this 指向当前的对象
-        if (o == null || getClass() != o.getClass())
-            return false; //再判断o是否为null，和o.类对象和本类对象是否一致
-        User user = (User) o;  //再把o对象强制转化为User类对象
-        return  Objects.equals(id, user.id) ;
-
     }
 }

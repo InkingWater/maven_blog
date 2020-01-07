@@ -1,6 +1,5 @@
 package xyz.lightseekers.maven_blog.mapper.ex;
 
-import xyz.lightseekers.maven_blog.bean.User;
 import xyz.lightseekers.maven_blog.bean.ex.LoveEXM;
 
 import java.util.List;

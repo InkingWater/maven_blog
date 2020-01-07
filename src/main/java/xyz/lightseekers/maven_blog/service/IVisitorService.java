@@ -1,7 +1,7 @@
 package xyz.lightseekers.maven_blog.service;
 
-import xyz.lightseekers.maven_blog.bean.Visitor;
 
+import xyz.lightseekers.maven_blog.bean.Visitor;
 
 import java.util.List;
 

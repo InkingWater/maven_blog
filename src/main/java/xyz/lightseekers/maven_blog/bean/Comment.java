@@ -1,6 +1,7 @@
 package xyz.lightseekers.maven_blog.bean;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Comment implements Serializable {
     private Integer id;
@@ -20,6 +21,8 @@ public class Comment implements Serializable {
     private Integer parentId;
 
     private Integer flag;
+
+    private Date date;
 
     private static final long serialVersionUID = 1L;
 
@@ -95,6 +98,14 @@ public class Comment implements Serializable {
         this.flag = flag;
     }
 
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -110,6 +121,7 @@ public class Comment implements Serializable {
         sb.append(", blogId=").append(blogId);
         sb.append(", parentId=").append(parentId);
         sb.append(", flag=").append(flag);
+        sb.append(", date=").append(date);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

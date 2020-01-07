@@ -3,12 +3,10 @@ package xyz.lightseekers.maven_blog.web.controller;
 
 
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,8 +18,6 @@ import xyz.lightseekers.maven_blog.util.Message;
 import xyz.lightseekers.maven_blog.util.MessageUtil;
 
 import javax.servlet.http.HttpServletRequest;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 
 import static xyz.lightseekers.maven_blog.util.BaiDuUtil.getLongitudeAndLatitude;
 
@@ -75,7 +71,7 @@ public class VisitorController {
         return MessageUtil.success(visitorService.update(visitor));
     }
 
-    public void setVisitor(HttpServletRequest request,Visitor visitor){
+    public void setVisitor(HttpServletRequest request, Visitor visitor){
         String ip = BaiDuUtil.getIpAddr(request);
         visitor.setIp(ip);
         visitor.setUrl(request.getRequestURI());

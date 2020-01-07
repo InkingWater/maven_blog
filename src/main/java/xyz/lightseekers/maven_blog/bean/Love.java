@@ -1,7 +1,5 @@
 package xyz.lightseekers.maven_blog.bean;
 
-import io.swagger.annotations.ApiModelProperty;
-
 import java.io.Serializable;
 
 public class Love implements Serializable {
@@ -11,13 +9,10 @@ public class Love implements Serializable {
 
     private Integer blogId;
 
-    @ApiModelProperty(hidden = true)
     private String ip;
 
-    @ApiModelProperty(hidden = true)
     private Double longitude;
 
-    @ApiModelProperty(hidden = true)
     private Double latitude;
 
     private Integer flag;

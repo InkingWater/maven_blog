@@ -2,9 +2,10 @@ package xyz.lightseekers.maven_blog.mapper;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 import xyz.lightseekers.maven_blog.bean.RoleAuth;
 import xyz.lightseekers.maven_blog.bean.RoleAuthExample;
-
+@Repository
 public interface RoleAuthMapper {
     long countByExample(RoleAuthExample example);
 

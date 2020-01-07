@@ -1,6 +1,7 @@
 package xyz.lightseekers.maven_blog.bean;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class MessageExample {
@@ -681,6 +682,66 @@ public class MessageExample {
 
         public Criteria andFlagNotBetween(Integer value1, Integer value2) {
             addCriterion("flag not between", value1, value2, "flag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDateIsNull() {
+            addCriterion("date is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDateIsNotNull() {
+            addCriterion("date is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDateEqualTo(Date value) {
+            addCriterion("date =", value, "date");
+            return (Criteria) this;
+        }
+
+        public Criteria andDateNotEqualTo(Date value) {
+            addCriterion("date <>", value, "date");
+            return (Criteria) this;
+        }
+
+        public Criteria andDateGreaterThan(Date value) {
+            addCriterion("date >", value, "date");
+            return (Criteria) this;
+        }
+
+        public Criteria andDateGreaterThanOrEqualTo(Date value) {
+            addCriterion("date >=", value, "date");
+            return (Criteria) this;
+        }
+
+        public Criteria andDateLessThan(Date value) {
+            addCriterion("date <", value, "date");
+            return (Criteria) this;
+        }
+
+        public Criteria andDateLessThanOrEqualTo(Date value) {
+            addCriterion("date <=", value, "date");
+            return (Criteria) this;
+        }
+
+        public Criteria andDateIn(List<Date> values) {
+            addCriterion("date in", values, "date");
+            return (Criteria) this;
+        }
+
+        public Criteria andDateNotIn(List<Date> values) {
+            addCriterion("date not in", values, "date");
+            return (Criteria) this;
+        }
+
+        public Criteria andDateBetween(Date value1, Date value2) {
+            addCriterion("date between", value1, value2, "date");
+            return (Criteria) this;
+        }
+
+        public Criteria andDateNotBetween(Date value1, Date value2) {
+            addCriterion("date not between", value1, value2, "date");
             return (Criteria) this;
         }
     }

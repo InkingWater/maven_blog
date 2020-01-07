@@ -5,7 +5,6 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import xyz.lightseekers.maven_blog.bean.Message;
 import xyz.lightseekers.maven_blog.bean.MessageExample;
-
 @Repository
 public interface MessageMapper {
     long countByExample(MessageExample example);
@@ -29,5 +28,4 @@ public interface MessageMapper {
     int updateByPrimaryKeySelective(Message record);
 
     int updateByPrimaryKey(Message record);
-
 }

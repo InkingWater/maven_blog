@@ -2,13 +2,12 @@ package xyz.lightseekers.maven_blog.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import xyz.lightseekers.maven_blog.bean.*;
+import xyz.lightseekers.maven_blog.bean.Love;
+import xyz.lightseekers.maven_blog.bean.User;
 import xyz.lightseekers.maven_blog.bean.ex.LoveEXM;
 import xyz.lightseekers.maven_blog.mapper.LoveMapper;
 import xyz.lightseekers.maven_blog.mapper.UserMapper;
-import xyz.lightseekers.maven_blog.mapper.VisitorMapper;
 import xyz.lightseekers.maven_blog.mapper.ex.LoveEXMMapper;
-import xyz.lightseekers.maven_blog.mapper.ex.LoveEXMapper;
 import xyz.lightseekers.maven_blog.service.ILoveService;
 
 import java.util.ArrayList;

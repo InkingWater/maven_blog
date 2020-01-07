@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import xyz.lightseekers.maven_blog.bean.Type;
 import xyz.lightseekers.maven_blog.bean.TypeExample;
 import xyz.lightseekers.maven_blog.mapper.TypeMapper;
+import xyz.lightseekers.maven_blog.mapper.ex.TypeEXHMapper;
 import xyz.lightseekers.maven_blog.service.ITypeHService;
 
 
@@ -16,6 +17,9 @@ public class TypeHServiceImpl implements ITypeHService {
 
     @Autowired
     private TypeMapper typeMapper;
+
+    @Autowired
+    private TypeEXHMapper typeEXHMapper;
 
     @Override
     public int deleteById(int id) throws RuntimeException {
@@ -46,7 +50,7 @@ public class TypeHServiceImpl implements ITypeHService {
             return selectAll();
         } else if (!"".equals(key)) {//前者为空 后者不为空
             key = "%" + key + "%";
-            return typeMapper.selectByName(key);
+            return typeEXHMapper.selectByName(key);
         }
         return null;
     }

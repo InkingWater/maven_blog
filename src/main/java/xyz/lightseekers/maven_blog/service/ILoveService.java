@@ -9,7 +9,7 @@ import java.util.List;
 public interface ILoveService {
 
     List<LoveEXM> selectAll() throws RuntimeException;
-    User selectById( int id ) throws RuntimeException;
+    User selectById(int id ) throws RuntimeException;
     List<User> selectListById() throws RuntimeException;
     List<User> selectAllByBlog(int id ) throws RuntimeException;
     int insert(Love love) throws RuntimeException;
