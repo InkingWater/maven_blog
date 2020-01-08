@@ -59,7 +59,11 @@ public class BlogQServiceImpl implements IBlogQService {
 
     @Override
     public BlogUserTypeEXQ selectById(int id) throws RuntimeException {
-        return blogEXQMapper.selectById(id);
+        BlogUserTypeEXQ blogUserTypeEXQ =blogEXQMapper.selectById(id);
+        Blog blog = blogMapper.selectByPrimaryKey(id);
+        blog.setVisitor(blog.getVisitor()+1);
+        blogMapper.updateByPrimaryKey(blog);
+        return blogUserTypeEXQ;
     }
 
     @Override
@@ -87,6 +91,19 @@ public class BlogQServiceImpl implements IBlogQService {
         Calendar calendar = Calendar.getInstance();
         calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH) + 1, 0, 0, 0);
         return blogEXQMapper.selectDayCountByMonth(calendar_30.getTime(), calendar.getTime());
+    }
+
+    @Override
+    public int deleteByBatch(int[] ids) throws RuntimeException {
+        for (int i =0;i< ids.length;i++){
+            blogMapper.deleteByPrimaryKey(ids[i]);
+        }
+        return ids.length;
+    }
+
+    @Override
+    public List<BlogUserTypeWithoutArticleEXQ> selectByVisitor() throws RuntimeException {
+        return blogEXQMapper.selectByVisitor();
     }
 
 

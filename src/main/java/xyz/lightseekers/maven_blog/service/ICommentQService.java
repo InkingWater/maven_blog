@@ -7,11 +7,11 @@ import xyz.lightseekers.maven_blog.bean.ex.CommentUserBlogEXQ;
 import java.util.List;
 
 public interface ICommentQService {
-    int insertToBlog(Comment comment) throws RuntimeException;
-
-    int insertToComment(Comment comment) throws RuntimeException;
+    int insertToBlogOrComment(Comment comment) throws RuntimeException;
 
     int deleteByCommentId(int id) throws RuntimeException;
+
+    int deleteCommentByBatch(int ids[]) throws RuntimeException;
 
     List<CommentUserBlogEXQ> selectAll() throws RuntimeException;
 

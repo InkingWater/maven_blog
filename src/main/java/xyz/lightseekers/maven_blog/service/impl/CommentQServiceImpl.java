@@ -26,12 +26,7 @@ public class CommentQServiceImpl implements ICommentQService {
 
 
     @Override
-    public int insertToBlog(Comment comment) throws RuntimeException {
-        return commentMapper.insert(comment);
-    }
-
-    @Override
-    public int insertToComment(Comment comment) throws RuntimeException {
+    public int insertToBlogOrComment(Comment comment) throws RuntimeException {
         return commentMapper.insert(comment);
     }
 
@@ -41,6 +36,14 @@ public class CommentQServiceImpl implements ICommentQService {
         example.createCriteria().andParentIdEqualTo(id);
         commentMapper.countByExample(example);
         return commentMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public int deleteCommentByBatch(int[] ids) throws RuntimeException {
+        for (int i =0;i< ids.length;i++){
+            commentMapper.deleteByPrimaryKey(ids[i]);
+        }
+        return ids.length;
     }
 
     @Override

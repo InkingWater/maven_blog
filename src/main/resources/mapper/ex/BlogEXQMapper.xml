@@ -80,4 +80,11 @@
     where UNIX_TIMESTAMP(date) between UNIX_TIMESTAMP(#{calendar_30}) and UNIX_TIMESTAMP(#{calendar})
     group by date_format(date,'%Y-%m-%d')
     </select>
+
+    <select id="selectByVisitor" resultMap="blogAllWithoutArticleResult">
+        select b.id id,u.name user,b.title title,date_format(date,'%Y-%m-%d %T') date,b.love love,b.visitor visitor,t.name type
+       from blog_blog b,blog_type t,blog_user u
+       where b.type_id = t.id and b.user_id = u.id
+       order by visitor desc limit 10
+    </select>
 </mapper>

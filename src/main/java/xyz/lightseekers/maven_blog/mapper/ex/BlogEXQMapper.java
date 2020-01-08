@@ -28,4 +28,6 @@ public interface BlogEXQMapper {
     List<BlogUserTypeEXQ> selectToday() throws RuntimeException;
 
     List<BlogCountByMonth> selectDayCountByMonth(Date calendar_30, Date calendar) throws RuntimeException;
+
+    List<BlogUserTypeWithoutArticleEXQ> selectByVisitor() throws RuntimeException;
 }
