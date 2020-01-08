@@ -59,6 +59,10 @@ public class TypeHController {
         return  MessageUtil.success(typeHService.saveOrUpdate(type));
     }
 
-
-
+    @GetMapping("/deleteTypeP")
+    @ApiOperation("批量删除类别")
+    public Message deleteTypeP(int[] id)
+    {
+      return  MessageUtil.success(typeHService.deleteTypeP(id));
+    }
 }

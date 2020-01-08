@@ -10,5 +10,6 @@ public interface ITypeHService {
     int saveOrUpdate(Type type) throws RuntimeException;
     List<Type> selectAll() throws RuntimeException;
     List<Type> selectByKey(String key) throws RuntimeException;
+    String deleteTypeP(int[] id) throws RuntimeException;
 
 }

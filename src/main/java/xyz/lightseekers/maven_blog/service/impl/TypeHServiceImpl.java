@@ -54,4 +54,12 @@ public class TypeHServiceImpl implements ITypeHService {
         }
         return null;
     }
+
+    @Override
+    public String deleteTypeP(int[] id) throws RuntimeException {
+        for (int i=0;i<id.length;i++){
+            deleteById(id[i]);
+        }
+        return id.toString();
+    }
 }
