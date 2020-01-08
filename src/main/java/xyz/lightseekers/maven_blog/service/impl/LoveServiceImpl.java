@@ -5,9 +5,11 @@ import org.springframework.stereotype.Service;
 import xyz.lightseekers.maven_blog.bean.Love;
 import xyz.lightseekers.maven_blog.bean.User;
 import xyz.lightseekers.maven_blog.bean.ex.LoveEXM;
+import xyz.lightseekers.maven_blog.bean.ex.LoveExcle;
 import xyz.lightseekers.maven_blog.mapper.LoveMapper;
 import xyz.lightseekers.maven_blog.mapper.UserMapper;
 import xyz.lightseekers.maven_blog.mapper.ex.LoveEXMMapper;
+import xyz.lightseekers.maven_blog.mapper.ex.LoveExcelMapper;
 import xyz.lightseekers.maven_blog.service.ILoveService;
 
 import java.util.ArrayList;
@@ -25,6 +27,8 @@ public class LoveServiceImpl implements ILoveService {
     @Autowired
     private LoveMapper loveMapper;
 
+    @Autowired
+    private LoveExcelMapper loveExcelMapper;
 
     /**
      * 产找所有的love对象
@@ -133,5 +137,23 @@ public class LoveServiceImpl implements ILoveService {
     @Override
     public List<LoveEXM> selectAllLoveByBlog(int id) throws RuntimeException {
         return loveEXMMapper.selectAllByBlog(id);
+    }
+
+    @Override
+    public int deleteBatch(int[] ids) throws RuntimeException {
+        for (int id : ids) {
+            loveMapper.deleteByPrimaryKey(id);
+        }
+        return 1;
+    }
+
+    @Override
+    public List<LoveExcle> selectAllExcle() {
+        return loveExcelMapper.selectAll() ;
+    }
+
+    @Override
+    public List<LoveExcle> selectLoveExcelByBlogId(int id) {
+        return loveExcelMapper.selectLoveExcelByBlogId(id);
     }
 }

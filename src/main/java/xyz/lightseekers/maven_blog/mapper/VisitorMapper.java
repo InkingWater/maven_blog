@@ -28,4 +28,5 @@ public interface VisitorMapper {
     int updateByPrimaryKeySelective(Visitor record);
 
     int updateByPrimaryKey(Visitor record);
+
 }
