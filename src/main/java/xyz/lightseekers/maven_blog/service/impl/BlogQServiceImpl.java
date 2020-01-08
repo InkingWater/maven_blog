@@ -89,6 +89,18 @@ public class BlogQServiceImpl implements IBlogQService {
         return blogEXQMapper.selectDayCountByMonth(calendar_30.getTime(), calendar.getTime());
     }
 
+    @Override
+    public int deleteByBatch(int[] ids) throws RuntimeException {
+        for (int i =0;i< ids.length;i++){
+            blogMapper.deleteByPrimaryKey(ids[i]);
+        }
+        return ids.length;
+    }
+
+    @Override
+    public List<BlogUserTypeWithoutArticleEXQ> selectByVisitor() throws RuntimeException {
+        return blogEXQMapper.selectByVisitor();
+    }
 
 //    public static long sub(Date date) {
 //        long t1 = date.getTime();

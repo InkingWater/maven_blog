@@ -1,6 +1,7 @@
 package xyz.lightseekers.maven_blog.web.controller;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,16 +29,11 @@ public class CommentQController {
         return MessageUtil.success(commentService.selectAll());
     }
 
-    @PostMapping("/insertToComment")
-    public Message insertToComment(HttpServletRequest request,Comment comment) {
+    @PostMapping("/insertToBlogOrComment")
+    @ApiOperation(value = "回复博客，或回复评论")
+    public Message insertToBlogOrComment(HttpServletRequest request,Comment comment) {
         setMessage(comment,request);
-        return MessageUtil.success(commentService.insertToComment(comment));
-    }
-
-    @PostMapping("/insertToBlog")
-    public Message insertToBlog(HttpServletRequest request,Comment comment) {
-        setMessage(comment,request);
-        return MessageUtil.success(commentService.insertToBlog(comment));
+        return MessageUtil.success(commentService.insertToBlogOrComment(comment));
     }
 
     @GetMapping("/selectByBlogIdByC")
@@ -65,5 +61,11 @@ public class CommentQController {
         Map<String, Object> longitudeAndLatitude = BaiDuUtil.getLongitudeAndLatitude(BaiDuUtil.getIpAddr(request));
         comment.setLongitude(Double.valueOf(longitudeAndLatitude.get("longitude").toString()));
         comment.setLatitude(Double.valueOf(longitudeAndLatitude.get("latitude").toString()));
+    }
+
+    @GetMapping("/deleteCommentByBatch")
+    @ApiOperation(value = "批量删除")
+    public Message deleteCommentByBatch(int ids[]){
+        return MessageUtil.success(commentService.deleteCommentByBatch(ids));
     }
 }

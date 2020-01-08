@@ -30,4 +30,8 @@ public interface IBlogQService {
     List<BlogUserTypeEXQ> selectToday() throws RuntimeException;
 
     List<BlogCountByMonth> selectDayCountByMonth() throws RuntimeException;
+
+    int deleteByBatch(int ids[]) throws RuntimeException;
+
+    List<BlogUserTypeWithoutArticleEXQ> selectByVisitor() throws RuntimeException;
 }

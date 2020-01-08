@@ -1,5 +1,6 @@
 package xyz.lightseekers.maven_blog.mapper_test.ex;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import xyz.lightseekers.maven_blog.mapper.ex.RoleAuthEXMapper;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@Ignore
 public class RoleAuthEXMapperTest {
 
     @Autowired
