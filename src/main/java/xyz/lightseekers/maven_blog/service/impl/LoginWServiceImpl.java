@@ -15,7 +15,7 @@ public class LoginWServiceImpl implements ILoginWService {
 
 
     @Override
-    public Map<String, String> RandomImgCode(int lengh) throws RuntimeException {
+    public Map<String, String> randomImgCode(int lengh) throws RuntimeException {
         String answer =RandomImgCodeUtil.getStringRandom(lengh);
         String base64= null;
         try {
@@ -30,7 +30,7 @@ public class LoginWServiceImpl implements ILoginWService {
     }
 
     @Override
-    public String SendEmail(String address) throws RuntimeException {
+    public String sendEmail(String address) throws RuntimeException {
         String code = RandomImgCodeUtil.getStringRandom(4);
         return EmailUtil.SentEmail(address,code);
     }

@@ -13,6 +13,7 @@ public interface IUserWService {
      int register(String username,String password,String email,String name) throws RuntimeException;
      User selectById(int id) throws RuntimeException;
      int deleteById(int id) throws RuntimeException;
+     int deleteMany(int id[]) throws RuntimeException;
      int addOrUpdate(User user) throws RuntimeException;
      List<User> selectAll() throws RuntimeException;
      int assignRoles(int userid,int roleid) throws RuntimeException;

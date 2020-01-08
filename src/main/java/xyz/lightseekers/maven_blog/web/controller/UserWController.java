@@ -89,5 +89,8 @@ public class UserWController {
         return MessageUtil.success(userService.selectUserRoleById(id));
     }
 
+    @GetMapping("/deleteMany")
+    @ApiOperation("批量删除")
+    public Message deleteMany(int id[]){ return  MessageUtil.success(userService.deleteMany(id));}
 
 }

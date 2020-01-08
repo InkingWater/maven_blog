@@ -154,6 +154,13 @@ public class UserWServiceImpl implements IUserWService {
         return userMapper.deleteByPrimaryKey(id);
     }
 
+    @Override
+    public int deleteMany(int[] id) throws RuntimeException {
+        for (int i=0;i<id.length;i++)
+        deleteById(id[i]);
+        return id.length;
+    }
+
     /**
      * 增加或修改用户信息
      * @param user user.id 由系统自增长
