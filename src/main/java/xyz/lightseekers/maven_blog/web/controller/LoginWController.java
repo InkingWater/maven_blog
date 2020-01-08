@@ -22,4 +22,9 @@ public class LoginWController {
         return MessageUtil.success(loginWService.RandomImgCode(lenth));
     }
 
+    @GetMapping("/sendEmail")
+    public Message sendEmail(String address){
+        return MessageUtil.success(loginWService.SendEmail(address));
+    }
+
 }
