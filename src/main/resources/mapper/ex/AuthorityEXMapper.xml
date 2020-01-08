@@ -9,6 +9,13 @@
         <result column="description" jdbcType="VARCHAR" property="description" />
         <collection property="children" column="id" select="selectByParentId"></collection>
     </resultMap>
+    <resultMap id="BaseResultMap" type="xyz.lightseekers.maven_blog.bean.Authority">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="url" jdbcType="VARCHAR" property="url" />
+        <result column="description" jdbcType="VARCHAR" property="description" />
+        <result column="parent_id" jdbcType="INTEGER" property="parentId" />
+    </resultMap>
     <select id="selectChildren" resultMap="authorityEXResult">
         select * from db_blog_web.blog_authority where id = #{id}
     </select>
@@ -19,7 +26,7 @@
     <select id="selectAll" resultMap="authorityEXResult">
         select * from db_blog_web.blog_authority
     </select>
-    <select id="search" resultType="xyz.lightseekers.maven_blog.bean.Authority">
+    <select id="search" resultMap="BaseResultMap">
         select * from db_blog_web.blog_authority where name like #{word}
     </select>
 
