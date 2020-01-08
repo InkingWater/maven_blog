@@ -3,7 +3,9 @@ package xyz.lightseekers.maven_blog.service;
 import xyz.lightseekers.maven_blog.bean.Love;
 import xyz.lightseekers.maven_blog.bean.User;
 import xyz.lightseekers.maven_blog.bean.ex.LoveEXM;
+import xyz.lightseekers.maven_blog.bean.ex.LoveExcle;
 
+import javax.swing.event.ListDataEvent;
 import java.util.List;
 
 public interface ILoveService {
@@ -17,5 +19,7 @@ public interface ILoveService {
     int update(Love love) throws RuntimeException;
     List<LoveEXM> selectByID(int id) throws RuntimeException;
     List<LoveEXM> selectAllLoveByBlog(int id) throws RuntimeException;
-
+    int deleteBatch(int[] ids) throws RuntimeException;
+    List<LoveExcle> selectAllExcle();
+    List<LoveExcle> selectLoveExcelByBlogId(int id);
 }

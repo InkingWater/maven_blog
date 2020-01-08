@@ -7,6 +7,7 @@ import xyz.lightseekers.maven_blog.mapper.MessageMapper;
 import xyz.lightseekers.maven_blog.mapper.ex.MessageEXMapper;
 import xyz.lightseekers.maven_blog.service.IMessageHService;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 
@@ -61,6 +62,14 @@ public class MessageHServiceImpl implements IMessageHService {
     public List<MessageEX> selectAll() throws RuntimeException {
         List<MessageEX> list = messageEXMapper.selectAll();
         return list;
+    }
+
+    @Override
+    public String deleteMessageP(int[] id) throws RuntimeException {
+        for (int i=0;i<id.length;i++){
+            deleteMessage(id[i]);
+        }
+        return null;
     }
 
 

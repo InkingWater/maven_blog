@@ -79,4 +79,18 @@ public class BannerHController {
         return MessageUtil.success(list);
     }
 
+    @GetMapping("/selectAll")
+    @ApiOperation("查找全部图片")
+    public Message selectAll()
+    {
+        List<Banner> list = bannerHService.selectAll();
+        return MessageUtil.success(list);
+    }
+
+    @GetMapping("/deleteBannerP")
+    @ApiOperation("批量删除图片")
+    public Message deleteBannerP(int[] id)
+    {
+        return MessageUtil.success(bannerHService.deleteBannerP(id));
+    }
 }

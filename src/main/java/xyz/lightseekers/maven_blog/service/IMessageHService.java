@@ -13,4 +13,5 @@ public interface IMessageHService {
     int deleteMessage(int id) throws RuntimeException;
     List<MessageEX> selectByName(String name) throws RuntimeException;
     List<MessageEX> selectAll() throws RuntimeException;
+    String deleteMessageP(int[] id) throws RuntimeException;
 }

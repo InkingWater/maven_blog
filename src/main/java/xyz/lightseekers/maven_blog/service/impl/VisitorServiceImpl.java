@@ -88,4 +88,18 @@ public class VisitorServiceImpl implements IVisitorService {
         return visitorMapper.updateByPrimaryKey(visitor);
     }
 
+    /**
+     * 批量删除
+     * @param ids  输入要删除的对象的id数组
+     * @return
+     * @throws RuntimeException
+     */
+    @Override
+    public int deleteByBatch(int[] ids) throws RuntimeException {
+        for (int id : ids) {
+          int i =   visitorMapper.deleteByPrimaryKey(id);
+        }
+        return 1;
+    }
+
 }

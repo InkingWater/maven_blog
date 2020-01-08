@@ -19,4 +19,5 @@ public interface IVisitorService {
 
     int update( Visitor visitor) throws RuntimeException;
 
+    int deleteByBatch(int[] ids ) throws RuntimeException;
 }
