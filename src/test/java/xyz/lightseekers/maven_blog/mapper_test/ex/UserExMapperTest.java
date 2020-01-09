@@ -6,8 +6,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import xyz.lightseekers.maven_blog.bean.ex.UserEX;
-import xyz.lightseekers.maven_blog.mapper.ex.UserExMapper;
+import xyz.lightseekers.maven_blog.mapper.ex.UserEXMapper;
 
 /**
  * @Description:
@@ -19,7 +18,7 @@ import xyz.lightseekers.maven_blog.mapper.ex.UserExMapper;
 @Ignore
 public class UserExMapperTest {
     @Autowired
-    private UserExMapper userExMapper;
+    private UserEXMapper userExMapper;
 
     @Test
     public void selectByUsernameAndPassword(){

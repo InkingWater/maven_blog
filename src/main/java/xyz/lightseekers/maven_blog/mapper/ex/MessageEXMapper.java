@@ -14,8 +14,10 @@ import java.util.List;
 public interface MessageEXMapper {
     /**
      * 获取所有的留言
+     *
      * @return 所有的留言
      */
     List<MessageEX> selectAll();
+
     List<MessageEX> selectByName(String name);
 }

@@ -12,10 +12,11 @@ import java.security.NoSuchAlgorithmException;
 public class MD5Util {
     /**
      * 对密码进行Md5加密
+     *
      * @param password 密码
      * @return Md5加密的结果
      */
-    public static String createPassword(String password){
+    public static String createPassword(String password) {
         String passwordMD5 = null;
         try {
             // 生成一个MD5加密计算摘要

@@ -34,7 +34,7 @@ public class Swagger2Config {
 
 	private ApiInfo apiInfo() {
 		return new ApiInfoBuilder()
-				.title("个人博客管理系统")
+				.title("团队博客管理系统")
 				.description("Blog")
 				.termsOfServiceUrl("http://www.lightseekers.xyz:8080")
 				.version("1.1")

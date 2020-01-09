@@ -6,11 +6,16 @@ import com.alibaba.fastjson.JSONObject;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import xyz.lightseekers.maven_blog.bean.Comment;
+import xyz.lightseekers.maven_blog.bean.Love;
+import xyz.lightseekers.maven_blog.bean.Message;
+import xyz.lightseekers.maven_blog.bean.Visitor;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -60,6 +65,7 @@ public class BaiDuUtil {
 
     /**
      * 获取Ip地址
+     *
      * @param request
      * @return
      */
@@ -99,5 +105,38 @@ public class BaiDuUtil {
         // ipAddress = this.getRequest().getRemoteAddr();
 
         return ipAddress;
+    }
+
+    public static void setVisitor(HttpServletRequest request, Visitor visitor){
+        String ip = BaiDuUtil.getIpAddr(request);
+        visitor.setIp(ip);
+        visitor.setUrl(request.getRequestURI());
+        visitor.setLatitude((double) getLongitudeAndLatitude(ip).get("latitude"));
+        visitor.setLongitude((double) getLongitudeAndLatitude(ip).get("longitude"));
+        visitor.setAddress((String.valueOf(getLongitudeAndLatitude(ip).get("address"))));
+        visitor.setDate(new Date());
+    }
+
+    public static void setComment(HttpServletRequest request, Comment comment){
+        comment.setIp(BaiDuUtil.getIpAddr(request));
+        Map<String, Object> longitudeAndLatitude = BaiDuUtil.getLongitudeAndLatitude(BaiDuUtil.getIpAddr(request));
+        comment.setLongitude(Double.valueOf(longitudeAndLatitude.get("longitude").toString()));
+        comment.setLatitude(Double.valueOf(longitudeAndLatitude.get("latitude").toString()));
+    }
+
+    public static void setMessage(HttpServletRequest request, Message message){
+        String ipAddr = BaiDuUtil.getIpAddr(request);
+        Map<String, Object> longitudeAndLatitude = BaiDuUtil.getLongitudeAndLatitude(ipAddr);
+        message.setIp(ipAddr);
+        message.setLatitude(Double.parseDouble((longitudeAndLatitude.get("latitude")).toString()));
+        message.setLongitude(Double.parseDouble((longitudeAndLatitude.get("longitude").toString())));
+    }
+
+    public static void setLove(HttpServletRequest request, Love love){
+        String ip = getIpAddr(request);
+        love.setIp(getIpAddr(request));
+        Map<String, Object> longitudeAndLatitude = BaiDuUtil.getLongitudeAndLatitude(ip);
+        love.setLongitude(Double.parseDouble((longitudeAndLatitude.get("longitude").toString())));
+        love.setLatitude(Double.parseDouble((longitudeAndLatitude.get("latitude").toString())));
     }
 }

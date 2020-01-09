@@ -94,6 +94,7 @@ public class RandomImgCodeUtil {
 
     /**
      * 生成指定长度的随机数字和字母
+     *
      * @param length
      * @return
      */
@@ -117,6 +118,7 @@ public class RandomImgCodeUtil {
 
     /**
      * Base64编码的验证码图片
+     *
      * @param w
      * @param h
      * @param code
@@ -130,8 +132,8 @@ public class RandomImgCodeUtil {
         Graphics2D g2 = image.createGraphics();
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         Color[] colors = new Color[5];
-        Color[] colorSpaces = new Color[] { Color.WHITE, Color.CYAN, Color.GRAY, Color.LIGHT_GRAY, Color.MAGENTA,
-                Color.ORANGE, Color.PINK, Color.YELLOW };
+        Color[] colorSpaces = new Color[]{Color.WHITE, Color.CYAN, Color.GRAY, Color.LIGHT_GRAY, Color.MAGENTA,
+                Color.ORANGE, Color.PINK, Color.YELLOW};
         float[] fractions = new float[colors.length];
         for (int i = 0; i < colors.length; i++) {
             colors[i] = colorSpaces[rand.nextInt(colorSpaces.length)];
@@ -182,16 +184,15 @@ public class RandomImgCodeUtil {
         g2.dispose();
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ImageIO.write(image, "jpg", baos);
-        String answer = "data:image/png;base64,"+new BASE64Encoder().encode(baos.toByteArray());
-        answer=answer.replaceAll("\n","").replaceAll("\r","");
+        String answer = "data:image/png;base64," + new BASE64Encoder().encode(baos.toByteArray());
+        answer = answer.replaceAll("\n", "").replaceAll("\r", "");
         return answer;
     }
 
     /**
      * 将Base64位编码的图片进行解码，并保存到指定目录
      *
-     * @param base64
-     *            base64编码的图片信息
+     * @param base64 base64编码的图片信息
      * @return
      */
     public static void base64ToImage(String base64) {
@@ -205,14 +206,6 @@ public class RandomImgCodeUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-    public static void main(String[] args) throws Exception {
-        String code =getStringRandom(4);
-        System.out.println(code);
-        String base64=imageToBase64(120, 40, code);
-//        System.out.println("data:image/png;base64,"+base64);
-        System.out.println(base64);
-//        base64ToImage(base64);
     }
 }
 

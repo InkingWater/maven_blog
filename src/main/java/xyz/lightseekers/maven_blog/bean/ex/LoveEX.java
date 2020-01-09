@@ -1,18 +1,11 @@
 package xyz.lightseekers.maven_blog.bean.ex;
 
-import java.io.Serializable;
+import xyz.lightseekers.maven_blog.bean.Blog;
+import xyz.lightseekers.maven_blog.bean.User;
 
-/**
- * @Description:
- * @Author: Light
- * @Date: 2020/1/2 15:04
- */
-public class LoveEX implements Serializable {
+public class LoveEX {
+
     private Integer id;
-
-    private UserEX user;
-
-    private BlogEX blog;
 
     private String ip;
 
@@ -22,18 +15,9 @@ public class LoveEX implements Serializable {
 
     private Integer flag;
 
-    @Override
-    public String toString() {
-        return "LoveEX{" +
-                "id=" + id +
-                ", user=" + user +
-                ", blog=" + blog +
-                ", ip='" + ip + '\'' +
-                ", longitude=" + longitude +
-                ", latitude=" + latitude +
-                ", flag=" + flag +
-                '}';
-    }
+    private User user;
+
+    private Blog blog;
 
     public Integer getId() {
         return id;
@@ -41,22 +25,6 @@ public class LoveEX implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public UserEX getUser() {
-        return user;
-    }
-
-    public void setUser(UserEX user) {
-        this.user = user;
-    }
-
-    public BlogEX getBlog() {
-        return blog;
-    }
-
-    public void setBlog(BlogEX blog) {
-        this.blog = blog;
     }
 
     public String getIp() {
@@ -89,5 +57,21 @@ public class LoveEX implements Serializable {
 
     public void setFlag(Integer flag) {
         this.flag = flag;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Blog getBlog() {
+        return blog;
+    }
+
+    public void setBlog(Blog blog) {
+        this.blog = blog;
     }
 }

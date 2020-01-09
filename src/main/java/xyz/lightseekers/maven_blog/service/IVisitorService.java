@@ -3,6 +3,7 @@ package xyz.lightseekers.maven_blog.service;
 
 import xyz.lightseekers.maven_blog.bean.Visitor;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 public interface IVisitorService {
@@ -15,9 +16,11 @@ public interface IVisitorService {
 
     int deleteById(int id) throws RuntimeException;
 
-    int insert( Visitor visitor ) throws RuntimeException;
+    int insert(Visitor visitor) throws RuntimeException;
 
-    int update( Visitor visitor) throws RuntimeException;
+    int update(Visitor visitor) throws RuntimeException;
 
-    int deleteByBatch(int[] ids ) throws RuntimeException;
+    int deleteByBatch(int[] ids) throws RuntimeException;
+
+    void download(HttpServletResponse response) throws RuntimeException;
 }

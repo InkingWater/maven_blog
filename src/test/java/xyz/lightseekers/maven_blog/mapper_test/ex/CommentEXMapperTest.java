@@ -23,6 +23,6 @@ public class CommentEXMapperTest {
 
     @Test
     public void selectByBlogId(){
-        System.out.println(commentEXMapper.selectByBlogId(1));
+        System.out.println(commentEXMapper.selectDataByBlogId(1));
     }
 }

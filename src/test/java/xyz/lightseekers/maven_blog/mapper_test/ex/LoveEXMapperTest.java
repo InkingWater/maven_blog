@@ -21,8 +21,4 @@ public class LoveEXMapperTest {
     @Autowired
     private LoveEXMapper loveEXMapper;
 
-    @Test
-    public void selectAll(){
-        System.out.println(loveEXMapper.selectAll());
-    }
 }

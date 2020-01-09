@@ -23,7 +23,7 @@ public class BlogEXMapperTest {
 
     @Test
     public void selectById(){
-        System.out.println(blogEXMapper.selectById(1));
+        System.out.println(blogEXMapper.selectUserById(1));
     }
 
     @Test

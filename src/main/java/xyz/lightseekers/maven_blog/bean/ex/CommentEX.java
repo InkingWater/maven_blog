@@ -21,7 +21,7 @@ public class CommentEX implements Serializable {
 
     private UserEX user;
 
-    private BlogEX blog;
+    private BlogDataEX blog;
 
     private Integer flag;
 
@@ -90,11 +90,11 @@ public class CommentEX implements Serializable {
         this.user = user;
     }
 
-    public BlogEX getBlog() {
+    public BlogDataEX getBlog() {
         return blog;
     }
 
-    public void setBlog(BlogEX blog) {
+    public void setBlog(BlogDataEX blog) {
         this.blog = blog;
     }
 

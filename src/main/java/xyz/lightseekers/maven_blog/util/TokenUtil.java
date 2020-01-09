@@ -12,8 +12,9 @@ import java.security.NoSuchAlgorithmException;
 public class TokenUtil {
     /**
      * 根据用户名和时间戳获取token
+     *
      * @param username 用户名
-     * @param time 时间戳
+     * @param time     时间戳
      * @return null或token值
      */
     public static String createToken(String username, String time) {

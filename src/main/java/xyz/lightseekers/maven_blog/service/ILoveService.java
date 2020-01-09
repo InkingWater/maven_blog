@@ -2,24 +2,37 @@ package xyz.lightseekers.maven_blog.service;
 
 import xyz.lightseekers.maven_blog.bean.Love;
 import xyz.lightseekers.maven_blog.bean.User;
-import xyz.lightseekers.maven_blog.bean.ex.LoveEXM;
-import xyz.lightseekers.maven_blog.bean.ex.LoveExcle;
+import xyz.lightseekers.maven_blog.bean.ex.LoveEX;
+import xyz.lightseekers.maven_blog.bean.ex.LoveDataExcelEX;
 
-import javax.swing.event.ListDataEvent;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 public interface ILoveService {
 
-    List<LoveEXM> selectAll() throws RuntimeException;
-    User selectById(int id ) throws RuntimeException;
+    List<LoveEX> selectAll() throws RuntimeException;
+
+    User selectById(int id) throws RuntimeException;
+
     List<User> selectListById() throws RuntimeException;
-    List<User> selectAllByBlog(int id ) throws RuntimeException;
+
+    List<User> selectAllByBlog(int id) throws RuntimeException;
+
     int insert(Love love) throws RuntimeException;
+
     int deleteLoveById(int id) throws RuntimeException;
+
     int update(Love love) throws RuntimeException;
-    List<LoveEXM> selectByID(int id) throws RuntimeException;
-    List<LoveEXM> selectAllLoveByBlog(int id) throws RuntimeException;
+
+    List<LoveEX> selectByID(int id) throws RuntimeException;
+
+    List<LoveEX> selectAllLoveByBlog(int id) throws RuntimeException;
+
     int deleteBatch(int[] ids) throws RuntimeException;
-    List<LoveExcle> selectAllExcle();
-    List<LoveExcle> selectLoveExcelByBlogId(int id);
+
+    List<LoveDataExcelEX> selectAllExcel() throws RuntimeException;
+
+    List<LoveDataExcelEX> selectLoveExcelByBlogId(int id) throws RuntimeException;
+
+    void downloadDatabaseByBlog(HttpServletResponse response, int id) throws RuntimeException;
 }

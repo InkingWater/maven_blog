@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="xyz.lightseekers.maven_blog.mapper.ex.BlogEXMapper">
-    <resultMap id="blogEXNoArticleResult" type="xyz.lightseekers.maven_blog.bean.ex.BlogEX">
+    <resultMap id="blogEXNoArticleResult" type="xyz.lightseekers.maven_blog.bean.ex.BlogDataEX">
         <id column="id" jdbcType="INTEGER" property="id" />
         <result column="title" jdbcType="VARCHAR" property="title" />
         <result column="date" jdbcType="TIMESTAMP" property="date" />
@@ -11,11 +11,11 @@
         <association property="type" column="type_id" select="selectType"></association>
         <association property="user" column="user_id" select="selectUser"></association>
     </resultMap>
-    <resultMap id="blogEXResult" type="xyz.lightseekers.maven_blog.bean.ex.BlogEX"
+    <resultMap id="blogEXResult" type="xyz.lightseekers.maven_blog.bean.ex.BlogDataEX"
                extends="blogEXNoArticleResult">
         <result column="article" jdbcType="LONGVARCHAR" property="article"/>
     </resultMap>
-    <select id="selectById" resultMap="blogEXResult">
+    <select id="selectUserById" resultMap="blogEXResult">
         select * from db_blog_web.blog_blog where id = #{id}
     </select>
     <select id="selectAllNoContent" resultMap="blogEXNoArticleResult">
@@ -26,5 +26,89 @@
     </select>
     <select id="selectUser" resultType="xyz.lightseekers.maven_blog.bean.User">
         select name from db_blog_web.blog_user where id = #{user_id}
+    </select>
+    <!--    查询全部信息，一个{}内返回-->
+    <resultMap id="blogAllResult" type="xyz.lightseekers.maven_blog.bean.ex.BlogUserTypeEX">
+        <id column="id" property="id"/>
+        <result column="user" property="user"/>
+        <result column="title" property="title"/>
+        <result column="article" property="article"/>
+        <result column="date" property="date"/>
+        <result column="love" property="love"/>
+        <result column="visitor" property="visitor"/>
+        <result column="type" property="type"/>
+    </resultMap>
+    <select id="selectAll" resultMap="blogAllResult">
+        select b.id id,u.name user,b.title title,b.article article,date_format(date,'%Y-%m-%d %T') date,b.love love,b.visitor visitor,t.name type
+        from blog_blog b,blog_type t,blog_user u
+        where b.type_id = t.id and b.user_id = u.id
+        order by date desc
+    </select>
+
+    <!--    查询除了article的全部信息 一个{}内返回-->
+    <resultMap id="blogAllWithoutArticleResult"
+               type="xyz.lightseekers.maven_blog.bean.ex.BlogWithoutArticleEX">
+        <result column="user" property="user"/>
+        <result column="title" property="title"/>
+        <result column="date" property="date"/>
+        <result column="love" property="love"/>
+        <result column="visitor" property="visitor"/>
+        <result column="type" property="type"/>
+    </resultMap>
+    <select id="selectAllWithoutArticle" resultMap="blogAllWithoutArticleResult">
+       select b.id id,u.name user,b.title title,date_format(date,'%Y-%m-%d %T') date,b.love love,b.visitor visitor,t.name type
+       from blog_blog b,blog_type t,blog_user u
+       where b.type_id = t.id and b.user_id = u.id
+       order by date desc
+    </select>
+    <select id="selectById" resultMap="blogAllResult">
+        select b.id id,u.name user,b.title title,b.article article,date_format(date,'%Y-%m-%d %T') date,b.love love,b.visitor visitor,t.name type
+        from blog_blog b,blog_type t,blog_user u
+        where b.type_id = t.id and b.user_id = u.id and b.id=#{id}
+    </select>
+    <select id="searchByBlogTitle" resultMap="blogAllResult">
+        select b.id id,u.name user,b.title title,b.article article,date_format(date,'%Y-%m-%d %T') date,b.love love,b.visitor visitor,t.name type
+        from blog_blog b,blog_type t,blog_user u
+        where b.type_id = t.id and b.user_id = u.id and b.title like #{titleWord}
+    </select>
+
+    <insert id="insert">
+        insert into blog_blog values(0,#{userId},#{title},#{article},#{date},0,0,#{typeId})
+    </insert>
+
+    <select id="selectBetweenDate" resultMap="blogAllResult">
+        select b.id id,u.name user,b.title title,b.article article,date_format(date,'%Y-%m-%d %T') date,b.love love,b.visitor visitor,t.name type
+        from blog_blog b,blog_type t,blog_user u
+        where b.type_id = t.id and b.user_id = u.id and b.date between #{lastDate} and #{nextDate}
+    </select>
+
+    <select id="selectByTypeId" resultMap="blogAllWithoutArticleResult">
+        select b.id id,u.name user,b.title title,date_format(date,'%Y-%m-%d %T') date,b.love love,b.visitor visitor,t.name type
+        from blog_blog b,blog_type t,blog_user u
+        where b.type_id = t.id and b.user_id = u.id and b.type_id=#{id}
+    </select>
+
+    <select id="selectToday" resultMap="blogAllResult">
+    select b.id id,u.name user,b.title title,b.article article,date_format(date,'%Y-%m-%d %T') date,b.love love,b.visitor visitor,t.name type
+    from blog_blog b,blog_type t,blog_user u
+    where DATE_FORMAT(date,'%Y-%m-%d') like DATE_FORMAT(now(),'%Y-%m-%d') and b.type_id = t.id and b.user_id = u.id
+    </select>
+
+
+    <resultMap id="blogCountResult" type="xyz.lightseekers.maven_blog.bean.ex.BlogCountEX">
+        <result column="datetime" property="datetime"/>
+        <result column="blogCount" property="blogCount"/>
+    </resultMap>
+    <select id="selectDayCountByMonth" resultMap="blogCountResult">
+    select date_format(date,'%Y-%m-%d') as datetime,count(*) as blogCount
+    from blog_blog
+    where UNIX_TIMESTAMP(date) between UNIX_TIMESTAMP(#{calendar_30}) and UNIX_TIMESTAMP(#{calendar})
+    group by date_format(date,'%Y-%m-%d')
+    </select>
+    <select id="selectByVisitor" resultMap="blogAllWithoutArticleResult">
+        select b.id id,u.name user,b.title title,date_format(date,'%Y-%m-%d %T') date,b.love love,b.visitor visitor,t.name type
+       from blog_blog b,blog_type t,blog_user u
+       where b.type_id = t.id and b.user_id = u.id
+       order by visitor desc limit 10
     </select>
 </mapper>

@@ -9,16 +9,78 @@
         <result column="longitude" jdbcType="DOUBLE" property="longitude"/>
         <result column="latitude" jdbcType="DOUBLE" property="latitude"/>
         <result column="flag" jdbcType="INTEGER" property="flag" />
-        <association property="user" column="user_id" select="selectUser"></association>
-        <collection property="children" column="id" select="selectChildren"></collection>
+        <association property="user" column="user_id" select="selectDataUser"></association>
+        <collection property="children" column="id" select="selectDataChildren"></collection>
     </resultMap>
-    <select id="selectByBlogId" resultMap="commentEXResult">
+    <select id="selectDataByBlogId" resultMap="commentEXResult">
         select * from db_blog_web.blog_comment where blog_id = #{blogId} and parent_id is null
     </select>
-    <select id="selectUser" resultType="xyz.lightseekers.maven_blog.bean.ex.UserEX">
+    <select id="selectDataUser" resultType="xyz.lightseekers.maven_blog.bean.ex.UserEX">
         select * from db_blog_web.blog_user where id = #{user_id}
     </select>
-    <select id="selectChildren" resultMap="commentEXResult">
+    <select id="selectDataChildren" resultMap="commentEXResult">
         select * from db_blog_web.blog_comment where parent_id = #{id}
+    </select>
+    <resultMap id="CommentAllResult" type="xyz.lightseekers.maven_blog.bean.ex.CommentUserBlogEX">
+        <id column="id" property="id"/>
+        <result column="content" property="content"/>
+        <result column="ip" property="ip"/>
+        <result column="longitude" property="longitude"/>
+        <result column="latitude" property="latitude"/>
+        <result column="userName" property="userName"/>
+        <result column="blogTitle" property="blogTitle"/>
+        <result column="flag" property="flag"/>
+    </resultMap>
+    <select id="selectAll" resultMap="CommentAllResult">
+        select c.id id,c.content content,c.ip ip,c.longitude longitude,c.latitude latitude,u.name userName,b.title blogTitle,c.flag
+        from blog_comment c ,blog_user u,blog_blog b
+        where c.user_id = u.id and c.blog_id = b.id
+    </select>
+    <select id="selectByBlogId" resultMap="CommentAllResult">
+        select c.id id,c.content content,c.ip ip,c.longitude longitude,c.latitude latitude,u.name userName,b.title blogTitle,c.flag
+        from blog_comment c ,blog_user u,blog_blog b
+        where c.blog_id = #{blogId} and c.user_id = u.id and b.id = c.blog_id
+    </select>
+
+    <!--    层级返回评论信息-->
+    <resultMap id="CommentAllByCResult" type="xyz.lightseekers.maven_blog.bean.ex.CommentLevelEX">
+        <id column="id" property="id"/>
+        <result column="content" property="content"/>
+        <result column="ip" property="ip"/>
+        <result column="longitude" property="longitude"/>
+        <result column="latitude" property="latitude"/>
+        <result column="userName" property="userName"/>
+        <result column="blogTitle" property="blogTitle"/>
+        <result column="flag" property="flag"/>
+        <collection property="children" column="id" ofType="xyz.lightseekers.maven_blog.bean.ex.CommentUserBlogEX"
+                    select="selectChildren"/>
+    </resultMap>
+    <select id="selectByBlogIdByC" resultMap="CommentAllByCResult">
+        select c.id id,c.content content,c.ip ip,c.longitude longitude,c.latitude latitude,u.name userName,b.title blogTitle,c.flag
+        from blog_comment c ,blog_user u,blog_blog b
+        where c.blog_id = #{blogId} and c.user_id = u.id and b.id = c.blog_id
+    </select>
+    <select id="selectChildren" resultType="xyz.lightseekers.maven_blog.bean.ex.CommentUserBlogEX">
+        select c.id id,c.content content,c.ip ip,c.longitude longitude,c.latitude latitude,u.name userName,b.title blogTitle,c.flag
+        from blog_comment c ,blog_user u,blog_blog b
+        where c.user_id = u.id and c.blog_id = b.id and c.parent_id =#{id}
+    </select>
+
+
+    <resultMap id="blogResult" type="xyz.lightseekers.maven_blog.bean.ex.BlogCommentEX">
+        <id column="id" property="id"/>
+        <result column="title" property="title"/>
+        <collection property="list"
+                    column="id"
+                    ofType="xyz.lightseekers.maven_blog.bean.ex.CommentUserBlogEX"
+                    select="selectBlogComment"/>
+    </resultMap>
+    <select id="selectLikeBlogTitleByC" resultMap="blogResult">
+        select id,title from blog_blog where title like #{blogTitle}
+    </select>
+    <select id="selectBlogComment" resultType="xyz.lightseekers.maven_blog.bean.ex.CommentUserBlogEX">
+        select c.id id,c.content content,c.ip ip,c.longitude longitude,c.latitude latitude,u.name userName,b.title blogTitle,c.flag
+        from blog_comment c ,blog_user u,blog_blog b
+        where c.blog_id = #{id} and c.user_id = u.id and c.blog_id = b.id
     </select>
 </mapper>

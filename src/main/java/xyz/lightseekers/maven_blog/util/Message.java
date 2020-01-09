@@ -7,6 +7,7 @@ package xyz.lightseekers.maven_blog.util;
  * @Modified User:
  */
 public class Message<T> {
+
     public Message() {
     }
 
