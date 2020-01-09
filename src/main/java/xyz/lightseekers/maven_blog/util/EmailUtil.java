@@ -16,7 +16,7 @@ public class EmailUtil {
             email.setSubject("验证码");//设置发送主题
             email.setMsg("验证码为："+code);//设置发送内容
             email.send();//进行发送
-            return "发送成功";
+            return code;
         } catch (EmailException e) {
             e.printStackTrace();
             return "发送失败";
