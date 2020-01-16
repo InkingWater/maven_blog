@@ -26,8 +26,8 @@
             insert into blog_role_auth(id,auth_id) values(0,#{authId})
     </insert>
 
-    <insert id="inserRoleAhth">
-        insert into blog_role_auth values (0,#{authid},#{parentid})
+    <insert id="insertRoleAuth">
+        insert into blog_role_auth values (0,#{authId},#{parentId})
     </insert>
 
 </mapper>

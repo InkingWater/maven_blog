@@ -5,10 +5,12 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import xyz.lightseekers.maven_blog.service.ILoginService;
+import xyz.lightseekers.maven_blog.service.IUserService;
 import xyz.lightseekers.maven_blog.util.Message;
 import xyz.lightseekers.maven_blog.util.MessageUtil;
 
@@ -21,6 +23,9 @@ public class LoginController {
 
     @Autowired
     private ILoginService loginService;
+
+    @Autowired
+    private IUserService userService;
 
     @ApiOperation("随机生成验证码并转换为base64格式")
     @GetMapping("/randomImg")
@@ -35,10 +40,10 @@ public class LoginController {
         return MessageUtil.success(loginService.sendEmail(address));
     }
 
-    @GetMapping("/loginByFace")
     @ApiOperation("人脸登录")
-    public Message loginByFace(MultipartFile uploadFile, HttpServletRequest request,Integer id){
-        return MessageUtil.success();
+    @PostMapping("/loginByFace")
+    public Message loginByFace(Integer id,MultipartFile uploadFile, HttpServletRequest request){
+        return MessageUtil.success(userService.loginFace(uploadFile,request,id));
     }
 
 }

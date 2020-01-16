@@ -26,7 +26,7 @@
     <select id="selectAll" resultMap="authorityEXResult">
         select * from db_blog_web.blog_authority
     </select>
-    <select id="search" resultMap="BaseResultMap">
+    <select id="selectByWord" resultMap="BaseResultMap">
         select * from db_blog_web.blog_authority where name like #{word}
     </select>
 

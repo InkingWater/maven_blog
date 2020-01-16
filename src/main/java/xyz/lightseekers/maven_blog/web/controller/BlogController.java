@@ -27,7 +27,7 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
-@RequestMapping("BlogQController")
+@RequestMapping("/blog")
 @Api(description = "博客模块-王秋润")
 public class BlogController {
 
@@ -91,11 +91,13 @@ public class BlogController {
     }
 
     @GetMapping("/selectToday")
+    @ApiOperation(value = "查询今天发布的全部博客信息")
     public Message selectToday() {
         return MessageUtil.success(blogService.selectToday());
     }
 
     @GetMapping("/selectDayCountByMonth")
+    @ApiOperation(value = "查询最近一个月的博客信息")
     public Message selectDayCountByMonth() {
         return MessageUtil.success(blogService.selectDayCountByMonth());
     }

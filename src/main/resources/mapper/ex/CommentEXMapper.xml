@@ -55,7 +55,7 @@
         <collection property="children" column="id" ofType="xyz.lightseekers.maven_blog.bean.ex.CommentUserBlogEX"
                     select="selectChildren"/>
     </resultMap>
-    <select id="selectByBlogIdByC" resultMap="CommentAllByCResult">
+    <select id="selectByBlogIdLevel" resultMap="CommentAllByCResult">
         select c.id id,c.content content,c.ip ip,c.longitude longitude,c.latitude latitude,u.name userName,b.title blogTitle,c.flag
         from blog_comment c ,blog_user u,blog_blog b
         where c.blog_id = #{blogId} and c.user_id = u.id and b.id = c.blog_id
@@ -75,7 +75,7 @@
                     ofType="xyz.lightseekers.maven_blog.bean.ex.CommentUserBlogEX"
                     select="selectBlogComment"/>
     </resultMap>
-    <select id="selectLikeBlogTitleByC" resultMap="blogResult">
+    <select id="selectLikeTitleLevel" resultMap="blogResult">
         select id,title from blog_blog where title like #{blogTitle}
     </select>
     <select id="selectBlogComment" resultType="xyz.lightseekers.maven_blog.bean.ex.CommentUserBlogEX">

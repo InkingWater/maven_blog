@@ -12,6 +12,6 @@
     </resultMap>
 
     <select id="selectByUsernameAndPassword" resultMap="userEXResult">
-        select * from db_blog_web.blog_user where username = #{username} or password = #{password}
+        select * from db_blog_web.blog_user where username = #{username} or password = #{password} and flag = 1
     </select>
 </mapper>

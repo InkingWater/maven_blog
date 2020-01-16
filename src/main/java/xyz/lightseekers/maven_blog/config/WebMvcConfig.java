@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.support.GenericConversionService;
 import org.springframework.web.bind.support.ConfigurableWebBindingInitializer;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 import xyz.lightseekers.maven_blog.convert.String2DateConverter;
 
@@ -26,14 +28,11 @@ public class WebMvcConfig {
 
     @PostConstruct
     public void initEditable() {
-
         ConfigurableWebBindingInitializer initializer = (ConfigurableWebBindingInitializer) handlerAdapter.getWebBindingInitializer();
         if (initializer.getConversionService() != null) {
             GenericConversionService genericConversionService = (GenericConversionService) initializer.getConversionService();
-
             genericConversionService.addConverter(new String2DateConverter());
-
         }
-
     }
+
 }

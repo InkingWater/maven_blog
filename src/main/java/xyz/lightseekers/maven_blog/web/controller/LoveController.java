@@ -30,7 +30,7 @@ import java.net.URLEncoder;
 import java.util.List;
 
 @RestController
-@RequestMapping("love")
+@RequestMapping("/love")
 @Api(description = "点赞模块-马嘉星")
 public class LoveController {
 

@@ -66,7 +66,7 @@
         from blog_blog b,blog_type t,blog_user u
         where b.type_id = t.id and b.user_id = u.id and b.id=#{id}
     </select>
-    <select id="searchByBlogTitle" resultMap="blogAllResult">
+    <select id="selectByBlogTitle" resultMap="blogAllResult">
         select b.id id,u.name user,b.title title,b.article article,date_format(date,'%Y-%m-%d %T') date,b.love love,b.visitor visitor,t.name type
         from blog_blog b,blog_type t,blog_user u
         where b.type_id = t.id and b.user_id = u.id and b.title like #{titleWord}

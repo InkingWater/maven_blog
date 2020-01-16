@@ -19,6 +19,7 @@ import xyz.lightseekers.maven_blog.mapper.UserMapper;
 import xyz.lightseekers.maven_blog.mapper.ex.RoleEXMapper;
 import xyz.lightseekers.maven_blog.mapper.ex.UserEXMapper;
 import xyz.lightseekers.maven_blog.service.IUserService;
+import xyz.lightseekers.maven_blog.util.AuthUtil;
 import xyz.lightseekers.maven_blog.util.RandomImgCodeUtil;
 import xyz.lightseekers.maven_blog.util.TokenUtil;
 
@@ -71,6 +72,42 @@ public class UserServiceImpl implements IUserService {
             logger.error("发送简单邮件时发生异常！", e);
         }
         return null;
+    }
+
+    @Override
+    public String loginFace(MultipartFile uploadFile, HttpServletRequest request, Integer id) {
+        User user = userMapper.selectByPrimaryKey(id);
+        String filePath = null;
+        if (uploadFile.isEmpty()) {
+            //返回选择文件提示
+            return "未上传图片";
+        }
+        //构建文件上传所要保存的"文件夹路径"--这里是相对路径，保存到项目根路径的文件夹下
+        String realPath = new String("src/main/resources/" + UPLOAD_PATH_PREFIX);
+        File file = new File(realPath);
+        File newFile = null;
+        String oldFile = new File("src/main/resources/static/").getAbsolutePath() + user.getImg();
+        if (!file.isDirectory()) {
+            //递归生成文件夹
+            file.mkdirs();
+        }
+        String oldName = uploadFile.getOriginalFilename();
+        System.out.println(oldFile);
+        String newName = UUID.randomUUID().toString() + oldName.substring(oldName.lastIndexOf("."), oldName.length());
+        try {
+            //构建真实的文件路径
+            newFile = new File(file.getAbsolutePath() + File.separator + newName);
+            //转存文件到指定路径，如果文件名重复的话，将会覆盖掉之前的文件,这里是把文件上传到 “绝对路径”
+            uploadFile.transferTo(newFile);
+            user.setImg(LOOK_PATH_PREFIX + newName);
+            filePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + user.getImg();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println(newFile.getAbsolutePath());
+        String s = AuthUtil.faceMatch(AuthUtil.checkSession(), oldFile, newFile.getAbsolutePath());
+        newFile.delete();
+        return s;
     }
 
     /**

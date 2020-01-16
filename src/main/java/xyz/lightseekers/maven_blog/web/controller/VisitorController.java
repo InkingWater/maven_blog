@@ -33,7 +33,7 @@ import java.util.List;
 import static xyz.lightseekers.maven_blog.util.BaiDuUtil.getLongitudeAndLatitude;
 
 @RestController
-@RequestMapping("visitor")
+@RequestMapping("/visitor")
 @Api(description = "访客模块-马嘉星")
 public class VisitorController {
 
@@ -87,6 +87,7 @@ public class VisitorController {
         return MessageUtil.success(visitorService.deleteByBatch(ids));
     }
 
+    @ApiOperation(value = "下载访客")
     @GetMapping("/download")
     public void download(HttpServletResponse response) throws Exception {
         visitorService.download(response);

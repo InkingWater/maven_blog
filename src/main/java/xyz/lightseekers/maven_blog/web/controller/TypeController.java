@@ -15,7 +15,7 @@ import xyz.lightseekers.maven_blog.util.MessageUtil;
 import java.util.List;
 
 @RestController
-@RequestMapping("/blogType")
+@RequestMapping("/type")
 @Api(description = "博客类别模块-何恺越")
 public class TypeController {
     @Autowired

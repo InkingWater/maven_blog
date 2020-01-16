@@ -42,7 +42,7 @@ public class MessageController {
     }
 
     @GetMapping("/selectMessage")
-    @ApiOperation("查找留言")
+    @ApiOperation("查找某个用户留言")
     public Message selectMessage(String name) {
         List<MessageEX> list = messageService.selectByName(name);
         return MessageUtil.success(list);

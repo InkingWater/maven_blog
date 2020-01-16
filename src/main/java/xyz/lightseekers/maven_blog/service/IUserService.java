@@ -33,4 +33,6 @@ public interface IUserService {
     RoleEX selectUserRoleById(int id) throws RuntimeException;
 
     String loginByEmail(String to) throws RuntimeException;
+
+    String loginFace(MultipartFile uploadFile,HttpServletRequest request,Integer id);
 }

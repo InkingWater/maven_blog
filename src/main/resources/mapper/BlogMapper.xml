@@ -298,7 +298,8 @@
       date = #{date,jdbcType=TIMESTAMP},
       love = #{love,jdbcType=INTEGER},
       visitor = #{visitor,jdbcType=INTEGER},
-      type_id = #{typeId,jdbcType=INTEGER}
+      type_id = #{typeId,jdbcType=INTEGER},
+      article= #{article,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
